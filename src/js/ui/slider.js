@@ -144,7 +144,7 @@ export default class Slider {
 				} else {
 					pos += obj.offsetTop;
 				}
-			} while (obj === obj.offsetParent);
+			} while (obj = obj.offsetParent);
 		}
 
 		return pos;
