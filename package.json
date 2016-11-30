@@ -2,10 +2,14 @@
 	"name": "mplayer",
 	"description": "MPlayer : HTML5 Media Player",
 	"version": "0.1.0-alpha.0",
-	"main": "dist/mplayer/mplayer.min.js",
+	"main": "dist/mplayer.min.js",
 	"author": {
 		"name": "dohoons",
 		"email": "dohoons@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dohoons/mplayer.git"
 	},
 	"license": "MIT",
 	"keywords": [
