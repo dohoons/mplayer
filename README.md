@@ -17,6 +17,8 @@
 var player = new MPlayer('#my-video'); // default
 </script>
 ```
+## 데모
+- https://dohoons.github.io/mplayer/demo/
 
 ## 개발환경
 ``` sh
