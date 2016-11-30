@@ -1,0 +1,51 @@
+{
+	"name": "mplayer",
+	"description": "MPlayer : HTML5 Media Player",
+	"version": "0.1.0-alpha.0",
+	"main": "dist/mplayer/mplayer.min.js",
+	"author": {
+		"name": "dohoons",
+		"email": "dohoons@gmail.com"
+	},
+	"license": "MIT",
+	"keywords": [
+		"javascript",
+		"html5",
+		"player",
+		"video player",
+		"audio player"
+	],
+	"jshintConfig": {
+		"browser": true,
+		"browserify": true,
+		"esnext": true,
+		"devel": true
+	},
+	"scripts": {
+		"start": "gulp default",
+		"doc": "gulp doc"
+	},
+	"devDependencies": {
+		"babel-core": "^6.18.2",
+		"babel-loader": "^6.2.7",
+		"babel-plugin-transform-object-assign": "^6.8.0",
+		"babel-preset-latest": "^6.16.0",
+		"del-gulpsass-blank-lines": "^0.1.3",
+		"es6-promise": "^4.0.5",
+		"gulp": "^3.9.1",
+		"gulp-autoprefixer": "^3.1.1",
+		"gulp-clean": "^0.3.2",
+		"gulp-esdoc": "^0.3.0",
+		"gulp-header": "^1.8.8",
+		"gulp-minify-css": "^1.2.4",
+		"gulp-rename": "^1.2.2",
+		"gulp-sass": "^2.3.2",
+		"gulp-sourcemaps": "^2.2.0",
+		"gulp-uglify": "^2.0.0",
+		"gulp-watch": "^4.3.11",
+		"gulp-webserver": "^0.9.1",
+		"ip": "^1.1.4",
+		"run-sequence": "^1.2.2",
+		"webpack-stream": "^3.2.0"
+	}
+}

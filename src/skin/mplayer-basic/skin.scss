@@ -1,0 +1,382 @@
+//
+// SKIN.SCSS
+// 스킨명 : mplayer-basic
+// 설명 : MPlayer 기본 스킨 (video / audio 공용)
+// --------------------------------------------------
+
+.mplayer-basic {
+	// ----------------------------------------------
+	$btn-width: 50px;
+	$btn-height: 45px;
+	$border-color: #030303;
+	$highlight-color: rgba(255,255,255,.1);
+	// ----------------------------------------------
+
+	box-sizing: border-box;
+	display: inline-block;
+	text-align: left;
+	background: #000;
+	border: 1px solid $border-color;
+	position: relative;
+	overflow: hidden;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	.media-el {
+		height: 100%;
+
+		video {
+			display: block;
+		}
+	}
+
+	// flexible
+	&.flexible {
+		width: 100%;
+		height: 100%;
+		
+		video {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+	}
+
+	// full-screen
+	&.is-fullscreen {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999999;
+		
+		video {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+	}
+
+	.poster {
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: 50%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+		
+		&.hide {
+			display: none;
+		}
+	}
+
+	.controls {
+		display: flex;
+		width: 100%;
+		font-size: 0;
+		background: #030303;
+		background: linear-gradient(to bottom, #212121 0%,#030303 100%); 
+		border-top: 1px solid $border-color;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		transition: all .4s .7s;
+
+		> * {
+			vertical-align: top;
+			box-shadow: inset -1px 1px 0 $highlight-color;
+		}
+
+		> *:not(:last-child) {
+			border-right: 1px solid $border-color;
+		}
+	}
+
+	&.is-playing .controls {
+		opacity: 0;
+		bottom: -($btn-height + 1);
+	}
+
+	&:hover .controls {
+		opacity: 1;
+		bottom: 0;
+		transition: all .4s .3s;
+	}
+
+	.btn-play-puase {
+		width: $btn-width;
+		height: $btn-height;
+		color: transparent;
+		background: url('img/ico-play.png') no-repeat 50% 50%;
+		border: 0 none;
+		overflow: hidden;
+		cursor: pointer;
+
+		&.is-paused {
+			background-image: url('img/ico-pause.png');
+		}
+	}
+
+	.slider {
+		flex: 1;
+		width: 100%;
+		height: 11px;
+		margin: 0 8px;
+		position: relative;
+		z-index: 1;
+
+		&:after {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 100%;
+			padding: 0 8px;
+			background: #222;
+			border: 1px solid $border-color;
+			border-radius: 5px;
+			box-shadow: 0 1px 0 #242424;
+			position: absolute;
+			top: 0;
+			left: -8px;
+		}
+
+		.btn {
+			display: block;
+			width: 0;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+		
+			&:before {
+				content: '';
+				display: block;
+				width: 100%;
+				height: 100%;
+				padding: 0 8px;
+				background: #626f7d;
+				background: linear-gradient(to bottom, #626f7d 0%,#4a5662 50%,#38414e 51%,#303a46 100%);
+				border-radius: 5px;
+				position: absolute;
+				top: 1px;
+				left: -8px;
+			}
+
+			&:after {
+				content: '';
+				display: block;
+				width: 22px;
+				height: 22px;
+				margin-right: -11px;
+				background: url('img/ico-slider.png') no-repeat;
+				position: absolute;
+				top: -3px;
+				right: 0;
+			}
+		}
+
+		.buffered {
+			box-sizing: content-box;
+			display: block;
+			width: 0;
+			height: 100%;
+			margin-left: -7px;
+			padding: 0 8px;
+			background: #fff;
+			border-radius: 5px;
+			opacity: .2;
+			position: absolute;
+			top: 1px;
+			left: 0;
+			z-index: 1;
+		}
+	}
+
+	.progress-wrap {
+		display: flex;
+		flex: 1;
+		padding: 17px 15px 0;
+		white-space: nowrap;
+
+		.progress {
+			width: 100%;
+		}
+	}
+
+	.time-wrap {
+		padding-left: 15px;
+		line-height: 11px;
+		font-family: tahoma;
+		font-size: 9px;
+		color: #8f8f8f;
+		text-shadow: 0 1px 0 $border-color;
+		white-space: nowrap;
+	}
+
+	.volume-wrap {
+		display: flex;
+		width: 100px;
+		padding: 17px 15px 0;
+		white-space: nowrap;
+
+		.volume {
+			width: 50px;
+		}
+	}
+
+	.btn-mute {
+		width: 14px;
+		height: 12px;
+		margin-right: 3px;
+		color: transparent;
+		background: url('img/ico-volume.png') no-repeat;
+		border: 0 none;
+		overflow: hidden;
+		cursor: pointer;
+
+		&.is-muted {
+			background-image: url('img/ico-volume-off.png');
+		}
+	}
+
+	.btn-fullscreen {
+		width: $btn-width;
+		height: $btn-height;
+		color: transparent;
+		background: url('img/ico-fullscreen.png') no-repeat 50% 50%;
+		border: 0 none;
+		overflow: hidden;
+		cursor: pointer;
+
+		&.is-fullscreen {
+			background-image: url('img/ico-fullscreen-cancel.png');
+		}
+	}
+
+	// audio
+	&.is-audio {
+		width: 100%;
+
+		.controls {
+			opacity: 1;
+			border-top: 0 none;
+			position: relative;
+			bottom: 0;
+		}
+	}
+
+	// ie9
+	&.is-ie9 {
+		.controls {
+			display: table;
+
+			> * {
+				display: table-cell;
+				font-size: 0 !important;
+			}
+		}
+
+		.progress-wrap {
+			font-size: 0;
+
+			&:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+		}
+
+		.progress {
+			float: left;
+			width: 70%;
+		}
+
+		.time-wrap {
+			float: left;
+			transition: none !important;
+		}
+
+		&.is-small .time-wrap {
+			display: none;
+		}
+
+		&.is-seeking .time-wrap {
+			display: block;
+		}
+
+		.volume-wrap {
+			width: 20px !important;
+			font-size: 0;
+		}
+
+		.volume {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.btn-mute {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
+	// small size
+	&.is-small {
+		// ----------------------------------------------
+		$btn-width: 33px;
+		$btn-height: 33px;
+		// ----------------------------------------------
+
+		.btn-play-puase {
+			width: $btn-width;
+			height: $btn-height;
+		}
+
+		.progress-wrap {
+			padding: 11px 10px 0;
+		}
+
+		.time-wrap {
+			width: auto;
+			padding: 0;
+			line-height: 1.2;
+			text-align: center;
+			font-size: 20px;
+			color: #fff;
+			text-shadow: 0 1px 0 rgba(0,0,0,.7);
+			transform: translateX(-50%);
+			position: absolute;
+			bottom: $btn-height + 13;
+			left: 50%;
+			transition: opacity .4s .7s;
+			opacity: 0;
+		}
+
+		&.is-seeking .time-wrap {
+			opacity: 1;
+			transition: opacity .4s;
+		}
+		
+		.volume-wrap {
+			width: 70px;
+			padding: 11px 10px 0;
+		}
+
+		.btn-mute {
+			display: none;
+		}
+
+		.btn-fullscreen {
+			width: $btn-width;
+			height: $btn-height;
+		}
+	}
+}
