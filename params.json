@@ -1,0 +1,6 @@
+{
+  "name": "MPlayer",
+  "tagline": "MPlayer : HTML5 Media Player",
+  "body": "# MPlayer : HTML5 Media Player\r\n- HTML5 video/audio Player\r\n- ES6 + babel + webpack\r\n- 디자인 스킨 옵션\r\n- 알파버전 : 기능 개발 및 테스트 중..\r\n\r\n## 기본 사용법\r\n``` html\r\n<video id=\"my-video\">\r\n\t<source src=\"http://clips.vorwaerts-gmbh.de/VfE_html5.mp4\" type=\"video/mp4\">\r\n</video>\r\n\r\n<link rel=\"stylesheet\" href=\"./mplayer/skin/mplayer-basic/skin.min.css\">\r\n<script src=\"./mplayer/mplayer.min.js\"></script>\r\n\r\n<script>\r\nvar player = new MPlayer('#my-video'); // default\r\n</script>\r\n```\r\n\r\n## 개발환경\r\n``` sh\r\n$ npm install -global gulp\r\n$ git clone https://github.com/dohoons/mplayer.git\r\n```\r\n- 기본 태스크\r\n``` sh\r\n$ npm start\r\n```\r\n- API 문서 생성\r\n``` sh\r\n$ npm doc\r\n```",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
