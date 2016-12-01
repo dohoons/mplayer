@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.1.0-alpha.0
+ * @version v0.1.1-alpha.0
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
