@@ -138,13 +138,14 @@ export default class Slider {
 			pos = 0;
 			
 		if (obj && obj.offsetParent) {
-			do {
+			while (obj) {
 				if(this.isX) {
 					pos += obj.offsetLeft;
 				} else {
 					pos += obj.offsetTop;
 				}
-			} while (obj = obj.offsetParent);
+				obj = obj.offsetParent;
+			}
 		}
 
 		return pos;
