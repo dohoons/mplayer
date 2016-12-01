@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	
-	var skinName = 'mplayer-basic';
+	var skinName = 'basic';
 	var type = 'audio';
 
 	if(window.MPlayerSkinList[skinName + '-' + type] === undefined) {

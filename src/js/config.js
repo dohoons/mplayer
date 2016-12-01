@@ -20,7 +20,7 @@ import { getCurrentScriptPath } from './util/util';
  * @property {Object} 	[options.event={}]				- 이벤트 객체
  */
 const DEFAULT_OPTIONS = {
-	skin: 'mplayer-basic',
+	skin: 'basic',
 	flexible: false,
 	width: '',
 	height: '',
