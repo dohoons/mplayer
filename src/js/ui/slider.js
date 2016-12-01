@@ -73,12 +73,11 @@ export default class Slider {
 	 * @param {Event} e
 	 */
 	update(e) {
-		let eventPos = this.isX ? e.pageX || e.touches[0].pageX : e.pageY || e.touches[0].pageY,
-			offsetPos = this.offsetPos,
-			isOver = eventPos >= offsetPos && eventPos <= (offsetPos + this.rangeSize),
+		let eventPos = e.touches ? (this.isX ? e.touches[0].pageX : e.touches[0].pageY) : (this.isX ? e.pageX : e.pageY),
+			isOver = eventPos >= this.offsetPos && eventPos <= (this.offsetPos + this.rangeSize),
 			gap = eventPos - this.offsetPos,
 			to = 0;
-
+		
 		if (this.isDown && isOver) {
 			if(this.isX) {
 				to = Math.round(gap / this.rangeSize * 100);
