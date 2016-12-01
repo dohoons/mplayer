@@ -2131,9 +2131,8 @@
 		}, {
 			key: 'update',
 			value: function update(e) {
-				var eventPos = this.isX ? e.pageX || e.touches[0].pageX : e.pageY || e.touches[0].pageY,
-				    offsetPos = this.offsetPos,
-				    isOver = eventPos >= offsetPos && eventPos <= offsetPos + this.rangeSize,
+				var eventPos = e.touches ? this.isX ? e.touches[0].pageX : e.touches[0].pageY : this.isX ? e.pageX : e.pageY,
+				    isOver = eventPos >= this.offsetPos && eventPos <= this.offsetPos + this.rangeSize,
 				    gap = eventPos - this.offsetPos,
 				    to = 0;
 
@@ -2209,13 +2208,14 @@
 				    pos = 0;
 
 				if (obj && obj.offsetParent) {
-					do {
+					while (obj) {
 						if (this.isX) {
 							pos += obj.offsetLeft;
 						} else {
 							pos += obj.offsetTop;
 						}
-					} while (obj = obj.offsetParent);
+						obj = obj.offsetParent;
+					}
 				}
 
 				return pos;
