@@ -1806,7 +1806,9 @@
 		}, {
 			key: 'timeupdate',
 			value: function timeupdate(e) {
-				this.player.ui.progress.position = this.player.el.currentTime / this.player.el.duration * 100;
+				if (this.player.ui.progress.isDown === false) {
+					this.player.ui.progress.position = this.player.el.currentTime / this.player.el.duration * 100;
+				}
 				this.updatePlayState();
 				this.callback(e);
 			}
