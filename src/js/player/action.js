@@ -77,4 +77,20 @@ export default class PlayerAction {
 	set currentTime(num) {
 		this.el.currentTime = num;
 	}
+
+	/**
+	 * 재생 속도를 가져온다.
+	 * @type {Number}
+	 */
+	get playbackRate() {
+		return this.el.playbackRate;
+	}
+
+	/**
+	 * 재생 속도를 변경한다.
+	 * @type {Number}
+	 */
+	set playbackRate(num) {
+		this.el.playbackRate = num;
+	}
 }
