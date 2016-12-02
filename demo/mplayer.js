@@ -707,6 +707,26 @@
 			set: function set(num) {
 				this.el.currentTime = num;
 			}
+
+			/**
+	   * 재생 속도를 가져온다.
+	   * @type {Number}
+	   */
+
+		}, {
+			key: 'playbackRate',
+			get: function get() {
+				return this.el.playbackRate;
+			}
+
+			/**
+	   * 재생 속도를 변경한다.
+	   * @type {Number}
+	   */
+			,
+			set: function set(num) {
+				this.el.playbackRate = num;
+			}
 		}]);
 
 		return PlayerAction;
