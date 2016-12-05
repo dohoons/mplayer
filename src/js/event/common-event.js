@@ -52,7 +52,7 @@ export default class CommonEvent {
 		let eventName, 
 			param;
 
-		if(e.constructor.name === 'Event') {
+		if(e.constructor.name.indexOf('Event') > -1) {
 			eventName = e.type;
 			param = e;
 		} else {
@@ -181,14 +181,6 @@ export default class CommonEvent {
 		} else {
 			this.player.pause();
 		}
-	}
-
-	/**
-	 * element contextmenu
-	 */
-	contextmenu(e) {
-		e.preventDefault();
-		this.callback(e);
 	}
 
 	/**

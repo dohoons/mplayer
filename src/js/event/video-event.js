@@ -18,6 +18,14 @@ class VideoUIEvent {
 		this.player = Player;
 	}
 
+	/**
+	 * contextmenu
+	 */
+	contextmenu(e) {
+		e.preventDefault();
+		this.callback(e);
+	}
+
 	/** 탐색 드래그 핸들러 */
 	progressOnDrag(value) {
 		this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -202,6 +210,8 @@ class VideoEvent extends CommonEvent {
 		if(ui.btnFullscreen) {
 			ui.btnFullscreen.addEventListener('click', this.FSButtonHandler.bind(this), false);
 		}
+
+		ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 		
 		if(SUPPORT_FS) {
 			FSCHANGE_EVENT_LIST.forEach(

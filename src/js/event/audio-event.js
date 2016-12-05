@@ -16,6 +16,14 @@ class AudioUIEvent {
 		this.player = Player;
 	}
 
+	/**
+	 * contextmenu
+	 */
+	contextmenu(e) {
+		e.preventDefault();
+		this.callback(e);
+	}
+
 	/** 탐색 드래그 핸들러 */
 	progressOnDrag(value) {
 		this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -114,6 +122,8 @@ class AudioEvent extends CommonEvent {
 		if(ui.volumeBar) {
 			ui.volumeBar.addEventListener('mousedown', this.uiEvents.volumeBar.bind(this), false);
 		}
+
+		ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 	}
 }
 
