@@ -16,7 +16,15 @@ const contextMenuStyle = `
 .mplayer-context-sub .mplayer-context-link { min-width: auto; }
 </style>
 `;
-
+// 상위 엘리먼트 탐색
+	var closest = function(el, selector) {
+		var matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : (el.msMatchesSelector ? 'msMatchesSelector' : 'matches');
+		while (el.parentElement) {
+			if (el[matches](selector)) return el;
+			el = el.parentElement;
+		}
+		return null;
+	};
 /**
  * 컨텍스트 메뉴
  * 서브 메뉴 지원
@@ -115,6 +123,7 @@ export default class ContextMenu {
 	show(e) {
 		this.hide();
 		window.addEventListener('click', this.hide, false);
+		window.addEventListener('contextmenu', this.hide, false);
 		window.addEventListener('resize', this.hide, false);
 		document.body.appendChild(this.el);
 		this.position(e);
@@ -124,12 +133,18 @@ export default class ContextMenu {
 	/**
 	 * 메뉴 숨기기
 	 */
-	hide() {
+	hide(e) {
+		if(e && e.type === 'contextmenu' && closest(e.target, '.mplayer')) {
+			return false;
+		}
+
 		let tg = document.querySelectorAll('.mplayer-context-menu');
 		for(let i=0, len=tg.length; i<len; ++i) {
 			document.body.removeChild(tg[i]);
 		}
+		
 		window.removeEventListener('click', this.hide, false);
+		window.removeEventListener('contextmenu', this.hide, false);
 		window.removeEventListener('resize', this.hide, false);
 	}
 
