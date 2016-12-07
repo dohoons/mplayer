@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.1.1-alpha.0
+ * @version v0.2.0-alpha.0
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -74,7 +74,7 @@
 
 	var _videoPlayer2 = _interopRequireDefault(_videoPlayer);
 
-	var _audioPlayer = __webpack_require__(11);
+	var _audioPlayer = __webpack_require__(12);
 
 	var _audioPlayer2 = _interopRequireDefault(_audioPlayer);
 
@@ -507,8 +507,21 @@
 		volume: 1.0,
 		playbackRate: 1.0,
 		preload: 'metadata',
+		contextmenu: true,
 		event: {}
 	};
+
+	var DEFAULT_CONTEXT_MENU = [{ title: 'MPlayer 정보', action: function action() {
+			window.open('https://github.com/dohoons/mplayer');
+		} }, { title: '재생속도', action: function action() {}, group: [{ title: '0.5x', action: function action() {
+				this.playbackRate = 0.5;
+			} }, { title: '1.0x', action: function action() {
+				this.playbackRate = 1.0;
+			} }, { title: '1.5x', action: function action() {
+				this.playbackRate = 1.5;
+			} }, { title: '2.0x', action: function action() {
+				this.playbackRate = 2.0;
+			} }] }];
 
 	var PUBLIC_NAMESPACE = 'MPlayer';
 
@@ -516,17 +529,18 @@
 	var IOS = /iPad|iPhone|iPod/.test(UA);
 	var SUPPORT_FS = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled || document.mozFullScreenEnabled;
 	var FSCHANGE_EVENT_LIST = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
-	var DEFAULT_EVENT_LIST = ['click', 'contextmenu', 'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
+	var ELEMENT_EVENT_LIST = ['click', 'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
 	var SCRIPT_PATH = (0, _util.getCurrentScriptPath)();
 
 	module.exports = {
 		DEFAULT_OPTIONS: DEFAULT_OPTIONS,
+		DEFAULT_CONTEXT_MENU: DEFAULT_CONTEXT_MENU,
 		PUBLIC_NAMESPACE: PUBLIC_NAMESPACE,
 		UA: UA,
 		IOS: IOS,
 		SUPPORT_FS: SUPPORT_FS,
 		FSCHANGE_EVENT_LIST: FSCHANGE_EVENT_LIST,
-		DEFAULT_EVENT_LIST: DEFAULT_EVENT_LIST,
+		ELEMENT_EVENT_LIST: ELEMENT_EVENT_LIST,
 		SCRIPT_PATH: SCRIPT_PATH
 	};
 
@@ -754,7 +768,7 @@
 
 	var _wrapper2 = _interopRequireDefault(_wrapper);
 
-	var _slider = __webpack_require__(10);
+	var _slider = __webpack_require__(11);
 
 	var _slider2 = _interopRequireDefault(_slider);
 
@@ -884,6 +898,10 @@
 
 	var _audioEvent2 = _interopRequireDefault(_audioEvent);
 
+	var _contextmenu = __webpack_require__(10);
+
+	var _contextmenu2 = _interopRequireDefault(_contextmenu);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -972,6 +990,10 @@
 
 				if (_config.UA.indexOf('MSIE 9') > -1) {
 					ui.container.classList.add('is-ie9');
+				}
+
+				if (player.opt.contextmenu) {
+					ui.contextmenu = new _contextmenu2.default(_config.DEFAULT_CONTEXT_MENU, player);
 				}
 			}
 
@@ -1083,10 +1105,26 @@
 			this.player = Player;
 		}
 
-		/** 탐색 드래그 핸들러 */
+		/**
+	  * contextmenu
+	  */
 
 
 		_createClass(VideoUIEvent, [{
+			key: 'contextmenu',
+			value: function contextmenu(e) {
+				e.preventDefault();
+
+				if (this.player.opt.contextmenu) {
+					this.player.ui.contextmenu.show(e);
+				}
+
+				this.callback(e);
+			}
+
+			/** 탐색 드래그 핸들러 */
+
+		}, {
 			key: 'progressOnDrag',
 			value: function progressOnDrag(value) {
 				this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -1324,6 +1362,8 @@
 					ui.btnFullscreen.addEventListener('click', this.FSButtonHandler.bind(this), false);
 				}
 
+				ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
+
 				if (_config.SUPPORT_FS) {
 					_config.FSCHANGE_EVENT_LIST.forEach(function (eventName) {
 						return document.addEventListener(eventName, _this2.FSChangeHandler.bind(_this2), false);
@@ -1406,7 +1446,7 @@
 			value: function on() {
 				var _this = this;
 
-				_config.DEFAULT_EVENT_LIST.forEach(function (eventName) {
+				_config.ELEMENT_EVENT_LIST.forEach(function (eventName) {
 					return _this.player.el.addEventListener(eventName, _this[eventName].bind(_this), false);
 				});
 
@@ -1423,7 +1463,7 @@
 			value: function off() {
 				var _this2 = this;
 
-				_config.DEFAULT_EVENT_LIST.forEach(function (eventName) {
+				_config.ELEMENT_EVENT_LIST.forEach(function (eventName) {
 					return _this2.player.el.removeEventListener(eventName, _this2[eventName].bind(_this2), false);
 				});
 
@@ -1445,7 +1485,7 @@
 				var eventName = void 0,
 				    param = void 0;
 
-				if (e.constructor.name === 'Event') {
+				if (e.constructor.name.indexOf('Event') > -1) {
 					eventName = e.type;
 					param = e;
 				} else {
@@ -1586,17 +1626,6 @@
 				} else {
 					this.player.pause();
 				}
-			}
-
-			/**
-	   * element contextmenu
-	   */
-
-		}, {
-			key: 'contextmenu',
-			value: function contextmenu(e) {
-				e.preventDefault();
-				this.callback(e);
 			}
 
 			/**
@@ -1905,10 +1934,26 @@
 			this.player = Player;
 		}
 
-		/** 탐색 드래그 핸들러 */
+		/**
+	  * contextmenu
+	  */
 
 
 		_createClass(AudioUIEvent, [{
+			key: 'contextmenu',
+			value: function contextmenu(e) {
+				e.preventDefault();
+
+				if (this.player.opt.contextmenu) {
+					this.player.ui.contextmenu.show(e);
+				}
+
+				this.callback(e);
+			}
+
+			/** 탐색 드래그 핸들러 */
+
+		}, {
 			key: 'progressOnDrag',
 			value: function progressOnDrag(value) {
 				this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -2042,6 +2087,8 @@
 				if (ui.volumeBar) {
 					ui.volumeBar.addEventListener('mousedown', this.uiEvents.volumeBar.bind(this), false);
 				}
+
+				ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 			}
 		}]);
 
@@ -2052,6 +2099,187 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var contextMenuStyle = '\n<style>\n.mplayer-context-menu { line-height: 1.2; font-family: \'Malgun Gothic\', \'dotum\', sans-serif; font-size: 12px; color: #fff; background: rgba(0,0,0,.85); outline: none; position: absolute; z-index: 99999999; }\n.mplayer-context-main { margin: 0; padding: 0; list-style: none; }\n.mplayer-context-sub { display: none; margin: 0; padding: 0; background: rgba(0,0,0,.85); list-style: none; border: 1px solid #000; position: absolute; top: 0; left: 100%; }\n.mplayer-context-dir-left .mplayer-context-sub { left: auto; right: 100%; }\n.mplayer-context-dir-top .mplayer-context-sub { top: auto; bottom: 0; }\n.mplayer-context-item { position: relative; }\n.mplayer-context-item:not(:first-child) > .mplayer-context-link { border-top: 1px solid rgba(255,255,255,.2); }\n.mplayer-context-item:hover > .mplayer-context-sub { display: block; }\n.mplayer-context-link { -webkit-box-sizing: border-box; box-sizing: border-box; display: block; min-width: 100px; max-width: 250px; padding: 8px 15px; color: #fff; text-decoration: none; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }\n.mplayer-context-link:hover,\n.mplayer-context-link:focus { background-color: rgba(255,255,255,.2); }\n.mplayer-context-sub .mplayer-context-link { min-width: auto; }\n</style>\n';
+
+	/**
+	 * 컨텍스트 메뉴
+	 * 서브 메뉴 지원
+	 * 
+	 * @class ContextMenu
+	 */
+
+	var ContextMenu = function () {
+
+		/**
+	  * Creates an instance of ContextMenu.
+	  * 
+	  * @param {Array} items 컨텍스트 메뉴 아이템 배열
+	  * @param {Player} Player Player Object
+	  */
+		function ContextMenu(items, Player) {
+			_classCallCheck(this, ContextMenu);
+
+			/**
+	   * 메뉴아이템 배열
+	   * @type {Array}
+	   */
+			this.items = items;
+
+			/**
+	   * Player Object
+	   * @type {Player}
+	   */
+			this.player = Player;
+
+			/**
+	   * 컨텍스트 메뉴 엘리먼트
+	   * @type {Element}
+	   */
+			this.el = null;
+
+			/**
+	   * 메뉴이벤트 배열
+	   * @type {Array}
+	   */
+			this.events = [];
+
+			// 초기화
+			this.init(items);
+
+			return this;
+		}
+
+		/**
+	  * 초기화. items 교체해서 재설정 가능
+	  * @param {Array} items 컨텍스트 메뉴 아이템 배열
+	  */
+
+
+		_createClass(ContextMenu, [{
+			key: 'init',
+			value: function init(items) {
+				this.items = items;
+				this.events = [];
+				this.el = document.createElement('div');
+				this.el.setAttribute('class', 'mplayer-context-menu');
+				this.el.setAttribute('tabindex', '0');
+				this.el.innerHTML = '\n\t\t\t' + contextMenuStyle + '\n\t\t\t<ul class="mplayer-context-main">' + this.createTree(this.items) + '</ul>\n\t\t';
+				this.applyEvent();
+			}
+
+			/**
+	   * 트리메뉴 HTML 스트링 생성
+	   * @param {Array} items
+	   */
+
+		}, {
+			key: 'createTree',
+			value: function createTree(items) {
+				var str = '';
+				for (var i = 0, len = items.length; i < len; ++i) {
+					this.events.push(items[i].action);
+					str += '\n\t\t\t\t<li class="mplayer-context-item">\n\t\t\t\t\t<a href="#" class="mplayer-context-link" onclick="event.preventDefault();">' + items[i].title + '</a>\n\t\t\t\t\t' + (items[i].group ? '<ul class="mplayer-context-sub">' + this.createTree(items[i].group) + '</ul>' : '') + '\t\t\n\t\t\t\t</li>\n\t\t\t';
+				}
+
+				return str;
+			}
+
+			/**
+	   * 이벤트 적용
+	   */
+
+		}, {
+			key: 'applyEvent',
+			value: function applyEvent() {
+				var _this = this;
+
+				this.el.querySelectorAll('.mplayer-context-link').forEach(function (el, i) {
+					el.addEventListener('click', _this.events[i].bind(_this.player), false);
+				});
+			}
+
+			/**
+	   * 메뉴 보이기
+	   * @param {MouseEvent} e
+	   */
+
+		}, {
+			key: 'show',
+			value: function show(e) {
+				this.hide();
+				window.addEventListener('click', this.hide, false);
+				window.addEventListener('resize', this.hide, false);
+				document.body.appendChild(this.el);
+				this.position(e);
+				this.el.focus();
+			}
+
+			/**
+	   * 메뉴 숨기기
+	   */
+
+		}, {
+			key: 'hide',
+			value: function hide() {
+				var tg = document.querySelectorAll('.mplayer-context-menu');
+				for (var i = 0, len = tg.length; i < len; ++i) {
+					document.body.removeChild(tg[i]);
+				}
+				window.removeEventListener('click', this.hide, false);
+				window.removeEventListener('resize', this.hide, false);
+			}
+
+			/**
+	   * 위치 계산하여 설정
+	   * @param {MouseEvent} e
+	   */
+
+		}, {
+			key: 'position',
+			value: function position(e) {
+				var el = this.el,
+				    winWidth = document.documentElement.clientWidth || document.body.clientWidth,
+				    winHeight = document.documentElement.clientHeight || document.body.clientHeight,
+				    scrollTop = window.scrollY,
+				    scrollLeft = window.scrollX,
+				    bottomLimit = winHeight - el.offsetHeight + scrollTop,
+				    rightLimit = winWidth - el.offsetWidth + scrollLeft,
+				    top = e.clientY + scrollTop,
+				    left = e.clientX + scrollLeft;
+
+				if (left >= rightLimit) {
+					this.el.classList.add('mplayer-context-dir-left');
+					left = rightLimit;
+				}
+
+				if (top >= bottomLimit) {
+					this.el.classList.add('mplayer-context-dir-top');
+					top = bottomLimit;
+				}
+
+				el.setAttribute('style', 'top:' + top + 'px; left:' + left + 'px');
+			}
+		}]);
+
+		return ContextMenu;
+	}();
+
+	exports.default = ContextMenu;
+
+/***/ },
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2250,7 +2478,7 @@
 	exports.default = Slider;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2269,7 +2497,7 @@
 
 	var _wrapper2 = _interopRequireDefault(_wrapper);
 
-	var _slider = __webpack_require__(10);
+	var _slider = __webpack_require__(11);
 
 	var _slider2 = _interopRequireDefault(_slider);
 
