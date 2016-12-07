@@ -1,8 +1,9 @@
 'use strict';
 
-import { DEFAULT_OPTIONS, UA, SCRIPT_PATH } from '../config';
+import { DEFAULT_OPTIONS, DEFAULT_CONTEXT_MENU, UA, SCRIPT_PATH } from '../config';
 import VideoEvent from '../event/video-event';
 import AudioEvent from '../event/audio-event';
+import ContextMenu from '../ui/contextmenu';
 
 // 전역 스킨 리스트 변수 초기화
 // 스킨 load 완료되면 '스킨명-타입':'레이아웃HTML' 조합으로 추가됨
@@ -76,6 +77,10 @@ export default class PlayerWrapper {
 
 		if(UA.indexOf('MSIE 9') > -1) {
 			ui.container.classList.add('is-ie9');
+		}
+
+		if(player.opt.contextmenu) {
+			ui.contextmenu = new ContextMenu(DEFAULT_CONTEXT_MENU, player);
 		}
 	}
 
