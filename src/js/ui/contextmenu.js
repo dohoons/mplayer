@@ -1,5 +1,7 @@
 'use strict';
 
+import { closest } from '../util/util';
+
 const contextMenuStyle = `
 <style>
 .mplayer-context-menu { line-height: 1.2; font-family: 'Malgun Gothic', 'dotum', sans-serif; font-size: 12px; color: #fff; background: rgba(0,0,0,.85); outline: none; position: absolute; z-index: 99999999; }
@@ -16,15 +18,7 @@ const contextMenuStyle = `
 .mplayer-context-sub .mplayer-context-link { min-width: auto; }
 </style>
 `;
-// 상위 엘리먼트 탐색
-	var closest = function(el, selector) {
-		var matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : (el.msMatchesSelector ? 'msMatchesSelector' : 'matches');
-		while (el.parentElement) {
-			if (el[matches](selector)) return el;
-			el = el.parentElement;
-		}
-		return null;
-	};
+
 /**
  * 컨텍스트 메뉴
  * 서브 메뉴 지원
