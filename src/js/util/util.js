@@ -36,6 +36,22 @@ module.exports.getMatchAttr = function(str) {
 };
 
 /**
+ * 상위 엘리먼트 탐색
+ * 
+ * @param {Element} el 기준 엘리먼트
+ * @param {String} selector CSS 셀렉터
+ * @returns {Element}
+ */
+module.exports.closest = function(el, selector) {
+	let matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : (el.msMatchesSelector ? 'msMatchesSelector' : 'matches');
+	while (el.parentElement) {
+		if (el[matches](selector)) return el;
+		el = el.parentElement;
+	}
+	return null;
+};
+
+/**
  * 현재 스크립트 FILE PATH 리턴
  * 
  * @returns {String}
