@@ -139,6 +139,17 @@ gulp.task('watch', function() {
 	});
 });
 
+// build task
+gulp.task('build', function() {
+	runSequence('clean', [
+		'script',
+		'etc',
+		'skinCSS',
+		'skinJS',
+		'skinIMG'
+	]);
+});
+
 // default task
 gulp.task('default', function() {
 	runSequence('clean', [
