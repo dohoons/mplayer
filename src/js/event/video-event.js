@@ -23,6 +23,11 @@ class VideoUIEvent {
 	 */
 	contextmenu(e) {
 		e.preventDefault();
+		
+		if(this.player.opt.contextmenu) {
+			this.player.ui.contextmenu.show(e);
+		}
+		
 		this.callback(e);
 	}
 

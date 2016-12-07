@@ -1,6 +1,6 @@
 'use strict';
 
-import { DEFAULT_EVENT_LIST } from '../config';
+import { ELEMENT_EVENT_LIST } from '../config';
 import { sec2str, getMatchAttr } from '../util/util';
 
 /**
@@ -23,7 +23,7 @@ export default class CommonEvent {
 	 * 플레이어 이벤트 등록
 	 */
 	on() {
-		DEFAULT_EVENT_LIST.forEach(
+		ELEMENT_EVENT_LIST.forEach(
 			eventName => this.player.el.addEventListener(eventName, this[eventName].bind(this), false)
 		);
 
@@ -35,7 +35,7 @@ export default class CommonEvent {
 	 * 플레이어 이벤트 제거
 	 */
 	off() {
-		DEFAULT_EVENT_LIST.forEach(
+		ELEMENT_EVENT_LIST.forEach(
 			eventName => this.player.el.removeEventListener(eventName, this[eventName].bind(this), false)
 		);
 

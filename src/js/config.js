@@ -31,8 +31,21 @@ const DEFAULT_OPTIONS = {
 	volume: 1.0,
 	playbackRate: 1.0,
 	preload: 'metadata',
+	contextmenu: true,
 	event: {}
 };
+
+const DEFAULT_CONTEXT_MENU = [
+	{title: 'MPlayer 정보', action: function() {
+		window.open('https://github.com/dohoons/mplayer');
+	}},
+	{title: '재생속도', action: function() {}, group: [
+		{title: '0.5x', action: function() { this.playbackRate = 0.5; }},
+		{title: '1.0x', action: function() { this.playbackRate = 1.0; }},
+		{title: '1.5x', action: function() { this.playbackRate = 1.5; }},
+		{title: '2.0x', action: function() { this.playbackRate = 2.0; }}
+	]}
+];
 
 const PUBLIC_NAMESPACE = 'MPlayer';
 
@@ -40,17 +53,18 @@ const UA = navigator.userAgent;
 const IOS = /iPad|iPhone|iPod/.test(UA);
 const SUPPORT_FS = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled || document.mozFullScreenEnabled;
 const FSCHANGE_EVENT_LIST = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
-const DEFAULT_EVENT_LIST = ['click', 'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause',
+const ELEMENT_EVENT_LIST = ['click', 'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause',
 	'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
 const SCRIPT_PATH = getCurrentScriptPath();
 
 module.exports = {
 	DEFAULT_OPTIONS,
+	DEFAULT_CONTEXT_MENU,
 	PUBLIC_NAMESPACE,
 	UA,
 	IOS,
 	SUPPORT_FS,
 	FSCHANGE_EVENT_LIST,
-	DEFAULT_EVENT_LIST,
+	ELEMENT_EVENT_LIST,
 	SCRIPT_PATH
 };
