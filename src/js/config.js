@@ -17,6 +17,7 @@ import { getCurrentScriptPath } from './util/util';
  * @property {Number} 	[options.volume=1.0]			- 음량(0 ~ 1)
  * @property {Number} 	[options.playbackRate=1.0]		- 재생 속도
  * @property {String} 	[options.preload='metadata']	- preload 옵션 (metadata | auto | none)
+ * @property {Boolean} 	[options.contextmenu=true]		- contextmenu 사용
  * @property {Object} 	[options.event={}]				- 이벤트 객체
  */
 const DEFAULT_OPTIONS = {
