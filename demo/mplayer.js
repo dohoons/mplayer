@@ -588,6 +588,22 @@
 	};
 
 	/**
+	 * 상위 엘리먼트 탐색
+	 * 
+	 * @param {Element} el 기준 엘리먼트
+	 * @param {String} selector CSS 셀렉터
+	 * @returns {Element}
+	 */
+	module.exports.closest = function (el, selector) {
+		var matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : el.msMatchesSelector ? 'msMatchesSelector' : 'matches';
+		while (el.parentElement) {
+			if (el[matches](selector)) return el;
+			el = el.parentElement;
+		}
+		return null;
+	};
+
+	/**
 	 * 현재 스크립트 FILE PATH 리턴
 	 * 
 	 * @returns {String}
@@ -2100,7 +2116,7 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2110,18 +2126,12 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _util = __webpack_require__(3);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var contextMenuStyle = '\n<style>\n.mplayer-context-menu { line-height: 1.2; font-family: \'Malgun Gothic\', \'dotum\', sans-serif; font-size: 12px; color: #fff; background: rgba(0,0,0,.85); outline: none; position: absolute; z-index: 99999999; }\n.mplayer-context-main { margin: 0; padding: 0; list-style: none; }\n.mplayer-context-sub { display: none; margin: 0; padding: 0; background: rgba(0,0,0,.85); list-style: none; border: 1px solid #000; position: absolute; top: 0; left: 100%; }\n.mplayer-context-dir-left .mplayer-context-sub { left: auto; right: 100%; }\n.mplayer-context-dir-top .mplayer-context-sub { top: auto; bottom: 0; }\n.mplayer-context-item { position: relative; }\n.mplayer-context-item:not(:first-child) > .mplayer-context-link { border-top: 1px solid rgba(255,255,255,.2); }\n.mplayer-context-item:hover > .mplayer-context-sub { display: block; }\n.mplayer-context-link { -webkit-box-sizing: border-box; box-sizing: border-box; display: block; min-width: 100px; max-width: 250px; padding: 8px 15px; color: #fff; text-decoration: none; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }\n.mplayer-context-link:hover,\n.mplayer-context-link:focus { background-color: rgba(255,255,255,.2); }\n.mplayer-context-sub .mplayer-context-link { min-width: auto; }\n</style>\n';
-	// 상위 엘리먼트 탐색
-	var closest = function closest(el, selector) {
-		var matches = el.webkitMatchesSelector ? 'webkitMatchesSelector' : el.msMatchesSelector ? 'msMatchesSelector' : 'matches';
-		while (el.parentElement) {
-			if (el[matches](selector)) return el;
-			el = el.parentElement;
-		}
-		return null;
-	};
+
 	/**
 	 * 컨텍스트 메뉴
 	 * 서브 메뉴 지원
@@ -2243,7 +2253,7 @@
 		}, {
 			key: 'hide',
 			value: function hide(e) {
-				if (e && e.type === 'contextmenu' && closest(e.target, '.mplayer')) {
+				if (e && e.type === 'contextmenu' && (0, _util.closest)(e.target, '.mplayer')) {
 					return false;
 				}
 
