@@ -105,9 +105,10 @@ export default class ContextMenu {
 	 * 이벤트 적용
 	 */
 	applyEvent() {
-		this.el.querySelectorAll('.mplayer-context-link').forEach((el, i) => {
-			el.addEventListener('click', this.events[i].bind(this.player), false);
-		});
+		let link = this.el.querySelectorAll('.mplayer-context-link');
+		for(let i=0, len=link.length; i<len; ++i) {
+			link[i].addEventListener('click', this.events[i].bind(this.player), false);
+		}
 	}
 
 	/**
