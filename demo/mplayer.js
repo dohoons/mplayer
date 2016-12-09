@@ -1502,12 +1502,12 @@
 				var eventName = void 0,
 				    param = void 0;
 
-				if (e.constructor.name.indexOf('Event') > -1) {
-					eventName = e.type;
-					param = e;
-				} else {
+				if (typeof e === 'string') {
 					eventName = e;
 					param = val;
+				} else {
+					eventName = e.type;
+					param = e;
 				}
 
 				this.player.userEvents.forEach(function (obj) {
@@ -2222,11 +2222,10 @@
 		}, {
 			key: 'applyEvent',
 			value: function applyEvent() {
-				var _this = this;
-
-				this.el.querySelectorAll('.mplayer-context-link').forEach(function (el, i) {
-					el.addEventListener('click', _this.events[i].bind(_this.player), false);
-				});
+				var link = this.el.querySelectorAll('.mplayer-context-link');
+				for (var i = 0, len = link.length; i < len; ++i) {
+					link[i].addEventListener('click', this.events[i].bind(this.player), false);
+				}
 			}
 
 			/**
@@ -2278,8 +2277,8 @@
 				var el = this.el,
 				    winWidth = document.documentElement.clientWidth || document.body.clientWidth,
 				    winHeight = document.documentElement.clientHeight || document.body.clientHeight,
-				    scrollTop = window.scrollY,
-				    scrollLeft = window.scrollX,
+				    scrollTop = window.pageYOffset,
+				    scrollLeft = window.pageXOffset,
 				    bottomLimit = winHeight - el.offsetHeight + scrollTop,
 				    rightLimit = winWidth - el.offsetWidth + scrollLeft,
 				    top = e.clientY + scrollTop,
