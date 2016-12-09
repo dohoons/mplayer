@@ -51,13 +51,13 @@ export default class CommonEvent {
 	callback(e, val) {
 		let eventName, 
 			param;
-
-		if(e.constructor.name.indexOf('Event') > -1) {
-			eventName = e.type;
-			param = e;
-		} else {
+		
+		if(typeof e === 'string') {
 			eventName = e;
 			param = val;
+		} else {
+			eventName = e.type;
+			param = e;
 		}
 
 		this.player.userEvents.forEach(obj => {
