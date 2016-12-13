@@ -13,6 +13,7 @@
 .mplayer-basic .controls > *:not(:last-child) { border-right: 1px solid #030303; }
 .mplayer-basic.is-playing .controls { opacity: 0; bottom: -46px; }
 .mplayer-basic:hover .controls { opacity: 1; bottom: 0; -webkit-transition: all .4s .3s; transition: all .4s .3s; }
+.mplayer-basic.is-focus .controls { opacity: 1; bottom: 0; -webkit-transition: none; transition: none; }
 .mplayer-basic .btn-play-puase { width: 50px; height: 45px; color: transparent; background: url("img/ico-play.png") no-repeat 50% 50%; border: 0 none; overflow: hidden; cursor: pointer; }
 .mplayer-basic .btn-play-puase.is-paused { background-image: url("img/ico-pause.png"); }
 .mplayer-basic .slider { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; width: 100%; height: 11px; margin: 0 8px; position: relative; z-index: 1; }

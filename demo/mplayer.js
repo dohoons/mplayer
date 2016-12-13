@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.2.0-alpha.0
+ * @version v0.2.1-alpha.0
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -1379,6 +1379,16 @@
 					ui.btnFullscreen.addEventListener('click', this.FSButtonHandler.bind(this), false);
 				}
 
+				// 내부에 포커스되면 is-focus 추가
+				[].forEach.call(document.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+					el.addEventListener('focus', function () {
+						return ui.container.classList.add('is-focus');
+					});
+					el.addEventListener('blur', function () {
+						return ui.container.classList.remove('is-focus');
+					});
+				});
+
 				ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 
 				if (_config.SUPPORT_FS) {
@@ -2104,6 +2114,16 @@
 				if (ui.volumeBar) {
 					ui.volumeBar.addEventListener('mousedown', this.uiEvents.volumeBar.bind(this), false);
 				}
+
+				// 내부에 포커스되면 is-focus 추가
+				[].forEach.call(document.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+					el.addEventListener('focus', function () {
+						return ui.container.classList.add('is-focus');
+					});
+					el.addEventListener('blur', function () {
+						return ui.container.classList.remove('is-focus');
+					});
+				});
 
 				ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 			}

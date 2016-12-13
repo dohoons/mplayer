@@ -12,6 +12,7 @@
 .mplayer-minimal .controls > * { vertical-align: top; }
 .mplayer-minimal.is-playing .controls { opacity: 0; bottom: -36px; }
 .mplayer-minimal:hover .controls { opacity: 1; bottom: 0; -webkit-transition: all .4s .3s; transition: all .4s .3s; }
+.mplayer-minimal.is-focus .controls { opacity: 1; bottom: 0; -webkit-transition: none; transition: none; }
 .mplayer-minimal .btn-play-puase { width: 50px; height: 35px; color: transparent; background: url("img/ico-play.png") no-repeat 50% 50%; border: 0 none; overflow: hidden; cursor: pointer; }
 .mplayer-minimal .btn-play-puase:hover, .mplayer-minimal .btn-play-puase:focus { background-image: url("img/ico-play-on.png"); }
 .mplayer-minimal .btn-play-puase.is-paused { background-image: url("img/ico-pause.png"); }
