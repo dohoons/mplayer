@@ -101,6 +101,12 @@
 		transition: all .4s .3s;
 	}
 
+	&.is-focus .controls {
+		opacity: 1;
+		bottom: 0;
+		transition: none;
+	}
+
 	.btn-play-puase {
 		width: $btn-width;
 		height: $btn-height;

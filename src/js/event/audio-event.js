@@ -128,6 +128,12 @@ class AudioEvent extends CommonEvent {
 			ui.volumeBar.addEventListener('mousedown', this.uiEvents.volumeBar.bind(this), false);
 		}
 
+		// 내부에 포커스되면 is-focus 추가
+		ui.container.querySelectorAll('a, button, input, [tabindex]').forEach( el => {
+			el.addEventListener('focus', () => ui.container.classList.add('is-focus'));
+			el.addEventListener('blur', () => ui.container.classList.remove('is-focus'));
+		});
+
 		ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 	}
 }
