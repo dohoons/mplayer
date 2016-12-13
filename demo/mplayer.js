@@ -1380,7 +1380,7 @@
 				}
 
 				// 내부에 포커스되면 is-focus 추가
-				[].forEach.call(document.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+				[].forEach.call(ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
 					el.addEventListener('focus', function () {
 						return ui.container.classList.add('is-focus');
 					});
@@ -2116,7 +2116,7 @@
 				}
 
 				// 내부에 포커스되면 is-focus 추가
-				[].forEach.call(document.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+				[].forEach.call(ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
 					el.addEventListener('focus', function () {
 						return ui.container.classList.add('is-focus');
 					});
