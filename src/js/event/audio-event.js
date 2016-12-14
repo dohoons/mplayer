@@ -16,19 +16,6 @@ class AudioUIEvent {
 		this.player = Player;
 	}
 
-	/**
-	 * contextmenu
-	 */
-	contextmenu(e) {
-		e.preventDefault();
-		
-		if(this.player.opt.contextmenu) {
-			this.player.ui.contextmenu.show(e);
-		}
-		
-		this.callback(e);
-	}
-
 	/** 탐색 드래그 핸들러 */
 	progressOnDrag(value) {
 		this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -127,14 +114,6 @@ class AudioEvent extends CommonEvent {
 		if(ui.volumeBar) {
 			ui.volumeBar.addEventListener('mousedown', this.uiEvents.volumeBar.bind(this), false);
 		}
-
-		// 내부에 포커스되면 is-focus 추가
-		[].forEach.call(ui.container.querySelectorAll('a, button, input, [tabindex]'), el => {
-			el.addEventListener('focus', () => ui.container.classList.add('is-focus'));
-			el.addEventListener('blur', () => ui.container.classList.remove('is-focus'));
-		});
-
-		ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 	}
 }
 

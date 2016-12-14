@@ -27,6 +27,14 @@ export default class CommonEvent {
 			eventName => this.player.el.addEventListener(eventName, this[eventName].bind(this), false)
 		);
 
+		// 내부에 포커스되면 is-focus 추가
+		[].forEach.call(this.player.ui.container.querySelectorAll('a, button, input, [tabindex]'), el => {
+			el.addEventListener('focus', () => this.player.ui.container.classList.add('is-focus'));
+			el.addEventListener('blur', () => this.player.ui.container.classList.remove('is-focus'));
+		});
+
+		this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
+
 		window.addEventListener('resize', this.updateSizeOption.bind(this), false);
 		window.addEventListener('scroll', this.updateSizeOption.bind(this), false);
 	}
@@ -170,6 +178,19 @@ export default class CommonEvent {
 				container.classList.remove(minwidth.value);
 			}
 		}
+	}
+
+	/**
+	 * contextmenu
+	 */
+	contextmenu(e) {
+		e.preventDefault();
+		
+		if(this.player.opt.contextmenu) {
+			this.player.ui.contextmenu.show(e);
+		}
+		
+		this.callback(e);
 	}
 
 	/**
