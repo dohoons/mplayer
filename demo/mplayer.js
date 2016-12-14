@@ -674,6 +674,22 @@
 			}
 
 			/**
+	   * 재생 토글
+	   * @returns {Player} Player Object
+	   */
+
+		}, {
+			key: 'togglePlay',
+			value: function togglePlay() {
+				if (this.el.paused) {
+					this.el.play();
+				} else {
+					this.el.pause();
+				}
+				return this;
+			}
+
+			/**
 	   * 재생 정지(처음으로 이동됨)
 	   * @returns {Player} Player Object
 	   */
@@ -717,6 +733,28 @@
 			,
 			set: function set(url) {
 				this.el.src = url;
+			}
+
+			/**
+	   * 음량을 가져온다.
+	   * @type {Number}
+	   */
+
+		}, {
+			key: 'volume',
+			get: function get() {
+				return this.el.volume;
+			}
+
+			/**
+	   * 음량을 변경한다.
+	   * @type {Number}
+	   */
+			,
+			set: function set(num) {
+				if (num > 1) num = 1;
+				if (num < 0) num = 0;
+				this.el.volume = num;
 			}
 
 			/**
@@ -1004,6 +1042,7 @@
 				el.classList.add('el');
 				el.controls = false;
 				el.setAttribute('playsinline', '');
+				el.setAttribute('tabindex', '0');
 
 				if (_config.UA.indexOf('MSIE 9') > -1) {
 					ui.container.classList.add('is-ie9');
@@ -1122,26 +1161,10 @@
 			this.player = Player;
 		}
 
-		/**
-	  * contextmenu
-	  */
+		/** 탐색 드래그 핸들러 */
 
 
 		_createClass(VideoUIEvent, [{
-			key: 'contextmenu',
-			value: function contextmenu(e) {
-				e.preventDefault();
-
-				if (this.player.opt.contextmenu) {
-					this.player.ui.contextmenu.show(e);
-				}
-
-				this.callback(e);
-			}
-
-			/** 탐색 드래그 핸들러 */
-
-		}, {
 			key: 'progressOnDrag',
 			value: function progressOnDrag(value) {
 				this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -1197,6 +1220,7 @@
 			key: 'poster',
 			value: function poster() {
 				this.player.play();
+				this.player.el.focus();
 			}
 
 			/** 음소거 토글 클릭 */
@@ -1379,18 +1403,6 @@
 					ui.btnFullscreen.addEventListener('click', this.FSButtonHandler.bind(this), false);
 				}
 
-				// 내부에 포커스되면 is-focus 추가
-				[].forEach.call(ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
-					el.addEventListener('focus', function () {
-						return ui.container.classList.add('is-focus');
-					});
-					el.addEventListener('blur', function () {
-						return ui.container.classList.remove('is-focus');
-					});
-				});
-
-				ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
-
 				if (_config.SUPPORT_FS) {
 					_config.FSCHANGE_EVENT_LIST.forEach(function (eventName) {
 						return document.addEventListener(eventName, _this2.FSChangeHandler.bind(_this2), false);
@@ -1477,8 +1489,21 @@
 					return _this.player.el.addEventListener(eventName, _this[eventName].bind(_this), false);
 				});
 
+				// 내부에 포커스되면 is-focus 추가
+				[].forEach.call(this.player.ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+					el.addEventListener('focus', function () {
+						return _this.player.ui.container.classList.add('is-focus');
+					});
+					el.addEventListener('blur', function () {
+						return _this.player.ui.container.classList.remove('is-focus');
+					});
+				});
+
+				this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
+
 				window.addEventListener('resize', this.updateSizeOption.bind(this), false);
 				window.addEventListener('scroll', this.updateSizeOption.bind(this), false);
+				window.addEventListener('keydown', this.keydown.bind(this), false);
 			}
 
 			/**
@@ -1496,6 +1521,7 @@
 
 				window.removeEventListener('resize', this.updateSizeOption.bind(this), false);
 				window.removeEventListener('scroll', this.updateSizeOption.bind(this), false);
+				window.removeEventListener('keydown', this.keydown.bind(this), false);
 			}
 
 			/**
@@ -1642,6 +1668,68 @@
 			}
 
 			/**
+	   * contextmenu
+	   */
+
+		}, {
+			key: 'contextmenu',
+			value: function contextmenu(e) {
+				e.preventDefault();
+
+				if (this.player.opt.contextmenu) {
+					this.player.ui.contextmenu.show(e);
+				}
+
+				this.callback(e);
+			}
+
+			/**
+	   * keydown - 단축키처리
+	   */
+
+		}, {
+			key: 'keydown',
+			value: function keydown(e) {
+				var player = this.player;
+
+				if (player.ui.container.classList.contains('is-focus')) {
+					switch (e.keyCode) {
+						case 32:
+							// 스페이스바
+							e.preventDefault();
+							player.togglePlay();
+							break;
+						case 70:
+							// F키
+							if (player.ui.btnFullscreen) {
+								this.FSButtonHandler.call(this);
+							}
+							break;
+						case 37:
+							// 왼쪽 화살표
+							e.preventDefault();
+							player.currentTime -= 5;
+							break;
+						case 39:
+							// 오른쪽 화살표
+							e.preventDefault();
+							player.currentTime += 5;
+							break;
+						case 38:
+							// 위쪽 화살표
+							e.preventDefault();
+							player.volume += 0.05;
+							break;
+						case 40:
+							// 아래쪽 화살표
+							e.preventDefault();
+							player.volume -= 0.05;
+							break;
+					}
+				}
+			}
+
+			/**
 	   * element click
 	   */
 
@@ -1653,6 +1741,7 @@
 				} else {
 					this.player.pause();
 				}
+				this.player.el.focus();
 			}
 
 			/**
@@ -1961,26 +2050,10 @@
 			this.player = Player;
 		}
 
-		/**
-	  * contextmenu
-	  */
+		/** 탐색 드래그 핸들러 */
 
 
 		_createClass(AudioUIEvent, [{
-			key: 'contextmenu',
-			value: function contextmenu(e) {
-				e.preventDefault();
-
-				if (this.player.opt.contextmenu) {
-					this.player.ui.contextmenu.show(e);
-				}
-
-				this.callback(e);
-			}
-
-			/** 탐색 드래그 핸들러 */
-
-		}, {
 			key: 'progressOnDrag',
 			value: function progressOnDrag(value) {
 				this.player.el.currentTime = this.player.el.duration / 100 * value;
@@ -2114,18 +2187,6 @@
 				if (ui.volumeBar) {
 					ui.volumeBar.addEventListener('mousedown', this.uiEvents.volumeBar.bind(this), false);
 				}
-
-				// 내부에 포커스되면 is-focus 추가
-				[].forEach.call(ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
-					el.addEventListener('focus', function () {
-						return ui.container.classList.add('is-focus');
-					});
-					el.addEventListener('blur', function () {
-						return ui.container.classList.remove('is-focus');
-					});
-				});
-
-				ui.container.addEventListener('contextmenu', this.uiEvents.contextmenu.bind(this), false);
 			}
 		}]);
 
