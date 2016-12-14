@@ -55,6 +55,7 @@ class VideoUIEvent {
 	/** 포스터 클릭 */
 	poster() {
 		this.player.play();
+		this.player.el.focus();
 	}
 
 	/** 음소거 토글 클릭 */

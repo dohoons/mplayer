@@ -37,6 +37,7 @@ export default class CommonEvent {
 
 		window.addEventListener('resize', this.updateSizeOption.bind(this), false);
 		window.addEventListener('scroll', this.updateSizeOption.bind(this), false);
+		window.addEventListener('keydown', this.keydown.bind(this), false);
 	}
 
 	/**
@@ -49,6 +50,7 @@ export default class CommonEvent {
 
 		window.removeEventListener('resize', this.updateSizeOption.bind(this), false);
 		window.removeEventListener('scroll', this.updateSizeOption.bind(this), false);
+		window.removeEventListener('keydown', this.keydown.bind(this), false);
 	}
 
 	/**
@@ -194,6 +196,43 @@ export default class CommonEvent {
 	}
 
 	/**
+	 * keydown - 단축키처리
+	 */
+	keydown(e) {
+		let player = this.player;
+
+		if(player.ui.container.classList.contains('is-focus')) {
+			switch(e.keyCode) {
+				case 32: // 스페이스바
+					e.preventDefault();
+					player.togglePlay();
+					break;
+				case 70: // F키
+					if(player.ui.btnFullscreen) {
+						this.FSButtonHandler.call(this);
+					}
+					break; 
+				case 37: // 왼쪽 화살표
+					e.preventDefault();
+					player.currentTime -= 5;
+					break;
+				case 39: // 오른쪽 화살표
+					e.preventDefault();
+					player.currentTime += 5;
+					break;
+				case 38: // 위쪽 화살표
+					e.preventDefault();
+					player.volume += 0.05;
+					break;
+				case 40: // 아래쪽 화살표
+					e.preventDefault();
+					player.volume -= 0.05;
+					break;
+			}
+		}
+	}
+
+	/**
 	 * element click
 	 */
 	click() {
@@ -202,6 +241,7 @@ export default class CommonEvent {
 		} else {
 			this.player.pause();
 		}
+		this.player.el.focus();
 	}
 
 	/**

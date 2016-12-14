@@ -74,6 +74,7 @@ export default class PlayerWrapper {
 		el.classList.add('el');
 		el.controls = false;
 		el.setAttribute('playsinline', '');
+		el.setAttribute('tabindex', '0');
 
 		if(UA.indexOf('MSIE 9') > -1) {
 			ui.container.classList.add('is-ie9');

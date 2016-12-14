@@ -25,6 +25,19 @@ export default class PlayerAction {
 		this.el.pause();
 		return this;
 	}
+	
+	/**
+	 * 재생 토글
+	 * @returns {Player} Player Object
+	 */
+	togglePlay() {
+		if(this.el.paused) {
+			this.el.play();
+		} else {
+			this.el.pause();
+		}
+		return this;
+	}
 
 	/**
 	 * 재생 정지(처음으로 이동됨)
@@ -60,6 +73,24 @@ export default class PlayerAction {
 	 */
 	set src(url) {
 		this.el.src = url;
+	}
+
+	/**
+	 * 음량을 가져온다.
+	 * @type {Number}
+	 */
+	get volume() {
+		return this.el.volume;
+	}
+
+	/**
+	 * 음량을 변경한다.
+	 * @type {Number}
+	 */
+	set volume(num) {
+		if(num > 1) num = 1
+		if(num < 0) num = 0;
+		this.el.volume = num;
 	}
 
 	/**
