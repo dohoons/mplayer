@@ -92,7 +92,7 @@ class VideoEvent extends CommonEvent {
 	 */
 	play() {
 		super.play();
-		this.player.ui.poster.classList.add('hide');
+		this.player.ui.poster.classList.add('mp-hide');
 	}
 
 	/**
@@ -101,7 +101,7 @@ class VideoEvent extends CommonEvent {
 	 */
 	timeupdate(e) {
 		super.timeupdate(e);
-		this.player.ui.poster.classList.add('hide');
+		this.player.ui.poster.classList.add('mp-hide');
 	}
 
 	/**
