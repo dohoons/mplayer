@@ -140,6 +140,7 @@
 
 		&:after {
 			content: '';
+			box-sizing: content-box;
 			display: block;
 			width: 100%;
 			height: 4px;
@@ -160,6 +161,7 @@
 		
 			&:before {
 				content: '';
+				box-sizing: content-box;
 				display: block;
 				width: 100%;
 				height: 4px;
@@ -211,6 +213,7 @@
 
 		&:after {
 			content: '';
+			box-sizing: content-box;
 			display: block;
 			width: 100%;
 			height: 100%;
@@ -238,6 +241,7 @@
 		
 			&:before {
 				content: '';
+				box-sizing: content-box;
 				display: block;
 				width: 100%;
 				height: 100%;
