@@ -1279,7 +1279,7 @@
 			key: 'play',
 			value: function play() {
 				_get(VideoEvent.prototype.__proto__ || Object.getPrototypeOf(VideoEvent.prototype), 'play', this).call(this);
-				this.player.ui.poster.classList.add('hide');
+				this.player.ui.poster.classList.add('mp-hide');
 			}
 
 			/**
@@ -1291,7 +1291,7 @@
 			key: 'timeupdate',
 			value: function timeupdate(e) {
 				_get(VideoEvent.prototype.__proto__ || Object.getPrototypeOf(VideoEvent.prototype), 'timeupdate', this).call(this, e);
-				this.player.ui.poster.classList.add('hide');
+				this.player.ui.poster.classList.add('mp-hide');
 			}
 
 			/**

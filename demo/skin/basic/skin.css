@@ -7,7 +7,7 @@
 .mplayer-basic.mp-is-fullscreen { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 999999; }
 .mplayer-basic.mp-is-fullscreen video { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 .mplayer-basic .mp-poster { width: 100%; height: 100%; background-size: cover; background-position: 50%; position: absolute; top: 0; left: 0; cursor: pointer; }
-.mplayer-basic .mp-poster.hide { display: none; }
+.mplayer-basic .mp-poster.mp-hide { display: none; }
 .mplayer-basic .mp-controls { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; width: 100%; font-size: 0; background: #030303; background: -webkit-linear-gradient(top, #212121 0%, #030303 100%); background: linear-gradient(to bottom, #212121 0%, #030303 100%); border-top: 1px solid #030303; position: absolute; bottom: 0; left: 0; -webkit-transition: all .4s .7s; transition: all .4s .7s; }
 .mplayer-basic .mp-controls > * { vertical-align: top; box-shadow: inset -1px 1px 0 rgba(255, 255, 255, 0.1); }
 .mplayer-basic .mp-controls > *:not(:last-child) { border-right: 1px solid #030303; }
