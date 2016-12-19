@@ -514,6 +514,8 @@
 
 	var DEFAULT_CONTEXT_MENU = [{ title: 'MPlayer 정보', action: function action() {
 			window.open('https://github.com/dohoons/mplayer');
+		} }, { title: '단축키 안내', action: function action() {
+			alert('\uC7AC\uC0DD/\uC77C\uC2DC\uC815\uC9C0 : space\n\uC804\uCCB4\uD654\uBA74 \uBCF4\uAE30/\uD574\uC81C : F\n\uC55E\uC73C\uB85C/\uB4A4\uB85C : \uC67C\uCABD/\uC624\uB978\uCABD \uBC29\uD5A5\uD0A4\n\uBCFC\uB968\uC870\uC815 : \uC704/\uC544\uB798 \uBC29\uD5A5\uD0A4');
 		} }, { title: '재생속도', action: function action() {}, group: [{ title: '0.5x', action: function action() {
 				this.playbackRate = 0.5;
 			} }, { title: '1.0x', action: function action() {
