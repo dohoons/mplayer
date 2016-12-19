@@ -40,6 +40,12 @@ const DEFAULT_CONTEXT_MENU = [
 	{title: 'MPlayer 정보', action: function() {
 		window.open('https://github.com/dohoons/mplayer');
 	}},
+	{title: '단축키 안내', action: function() {
+		alert(`재생/일시정지 : space
+전체화면 보기/해제 : F
+앞으로/뒤로 : 왼쪽/오른쪽 방향키
+볼륨조정 : 위/아래 방향키`);
+	}},
 	{title: '재생속도', action: function() {}, group: [
 		{title: '0.5x', action: function() { this.playbackRate = 0.5; }},
 		{title: '1.0x', action: function() { this.playbackRate = 1.0; }},
