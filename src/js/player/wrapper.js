@@ -68,7 +68,7 @@ export default class PlayerWrapper {
 		el.parentNode.insertBefore(wrapper, el);
 		wrapper.outerHTML = htmlString;
 		ui.container = el.previousElementSibling;
-		ui.container.querySelector('.media-el').appendChild(el);
+		ui.container.querySelector('.mp-media-el').appendChild(el);
 
 		// element manipulation
 		el.classList.add('el');
@@ -77,7 +77,7 @@ export default class PlayerWrapper {
 		el.setAttribute('tabindex', '0');
 
 		if(UA.indexOf('MSIE 9') > -1) {
-			ui.container.classList.add('is-ie9');
+			ui.container.classList.add('mp-is-ie9');
 		}
 
 		if(player.opt.contextmenu) {

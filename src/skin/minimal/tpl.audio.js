@@ -6,25 +6,25 @@
 
 	if(window.MPlayerSkinList[skinName + '-' + type] === undefined) {
 		window.MPlayerSkinList[skinName + '-' + type] = 
-			'<div class="mplayer mplayer-minimal is-audio" data-maxwidth-320="is-small" data-minwidth-800="is-big">' +
-			'	<div class="media-el"></div>' +
-			'	<div class="controls">' +
-			'		<button type="button" class="btn-play-puase" data-first-text="재생" data-second-text="일시정지">재생</button>' + 
-			'		<div class="progress-wrap">' + 
-			'			<div class="slider progress">' + 
-			'				<span class="btn"></span>' + 
-			'				<span class="buffered"></span>' + 
+			'<div class="mplayer mplayer-minimal mp-is-audio" data-maxwidth-320="mp-is-small" data-minwidth-800="mp-is-big">' +
+			'	<div class="mp-media-el"></div>' +
+			'	<div class="mp-controls">' +
+			'		<button type="button" class="mp-btn-play-puase" data-first-text="재생" data-second-text="일시정지">재생</button>' + 
+			'		<div class="mp-progress-wrap">' + 
+			'			<div class="mp-slider mp-progress">' + 
+			'				<span class="mp-btn"></span>' + 
+			'				<span class="mp-buffered"></span>' + 
 			'			</div>' + 
-			'			<div class="time-wrap">' + 
-			'				<span class="current-time">00:00</span>' +
+			'			<div class="mp-time-wrap">' + 
+			'				<span class="mp-current-time">00:00</span>' +
 			'				 / ' + 
-			'				<span class="total-time">00:00</span>' + 
+			'				<span class="mp-total-time">00:00</span>' + 
 			'			</div>' + 
 			'		</div>' + 
-			'		<div class="volume-wrap">' + 
-			'			<button type="button" class="btn-mute" data-first-text="음소거" data-second-text="음소거 해제">음소거</button>' + 
-			'			<div class="slider volume">' + 
-			'				<span class="btn"></span>' + 
+			'		<div class="mp-volume-wrap">' + 
+			'			<button type="button" class="mp-btn-mute" data-first-text="음소거" data-second-text="음소거 해제">음소거</button>' + 
+			'			<div class="mp-slider mp-volume">' + 
+			'				<span class="mp-btn"></span>' + 
 			'			</div>' + 
 			'		</div>' + 
 			'	</div>' +

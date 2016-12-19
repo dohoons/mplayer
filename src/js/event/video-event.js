@@ -130,13 +130,13 @@ class VideoEvent extends CommonEvent {
 			this.player.el.removeAttribute('playsinline');
 			this.player.el.play();
 		} else {
-			if(container.classList.contains('is-fullscreen')) {
-				container.classList.remove('is-fullscreen');
-				btn.classList.remove('is-fullscreen');
+			if(container.classList.contains('mp-is-fullscreen')) {
+				container.classList.remove('mp-is-fullscreen');
+				btn.classList.remove('mp-is-fullscreen');
 				btn.innerHTML = btn.getAttribute('data-first-text');
 			} else {
-				container.classList.add('is-fullscreen');
-				btn.classList.add('is-fullscreen');
+				container.classList.add('mp-is-fullscreen');
+				btn.classList.add('mp-is-fullscreen');
 				btn.innerHTML = btn.getAttribute('data-second-text');
 			}
 		}
@@ -151,13 +151,13 @@ class VideoEvent extends CommonEvent {
 		let fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 
 		if (Boolean(fullscreenElement) === false) {
-			container.classList.remove('is-fullscreen');
-			btn.classList.remove('is-fullscreen');
+			container.classList.remove('mp-is-fullscreen');
+			btn.classList.remove('mp-is-fullscreen');
 			btn.innerHTML = btn.getAttribute('data-first-text');
 		}
 		if(Boolean(fullscreenElement) === true && fullscreenElement == container) {
-			container.classList.add('is-fullscreen');
-			btn.classList.add('is-fullscreen');
+			container.classList.add('mp-is-fullscreen');
+			btn.classList.add('mp-is-fullscreen');
 			btn.innerHTML = btn.getAttribute('data-second-text');
 		}
 	}

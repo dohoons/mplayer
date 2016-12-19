@@ -27,10 +27,10 @@ export default class CommonEvent {
 			eventName => this.player.el.addEventListener(eventName, this[eventName].bind(this), false)
 		);
 
-		// 내부에 포커스되면 is-focus 추가
+		// 내부에 포커스되면 mp-is-focus 추가
 		[].forEach.call(this.player.ui.container.querySelectorAll('a, button, input, [tabindex]'), el => {
-			el.addEventListener('focus', () => this.player.ui.container.classList.add('is-focus'));
-			el.addEventListener('blur', () => this.player.ui.container.classList.remove('is-focus'));
+			el.addEventListener('focus', () => this.player.ui.container.classList.add('mp-is-focus'));
+			el.addEventListener('blur', () => this.player.ui.container.classList.remove('mp-is-focus'));
 		});
 
 		this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
@@ -119,18 +119,18 @@ export default class CommonEvent {
 		
 		if(btnPlayPause) {
 			if(el.paused) {
-				btnPlayPause.classList.remove('is-paused');
+				btnPlayPause.classList.remove('mp-is-paused');
 				btnPlayPause.innerHTML = btnPlayPause.getAttribute('data-first-text');
 			} else {
-				btnPlayPause.classList.add('is-paused');
+				btnPlayPause.classList.add('mp-is-paused');
 				btnPlayPause.innerHTML = btnPlayPause.getAttribute('data-second-text');
 			}
 		}
 		
 		if(el.paused) {
-			player.ui.container.classList.remove('is-playing');
+			player.ui.container.classList.remove('mp-is-playing');
 		} else {
-			player.ui.container.classList.add('is-playing');
+			player.ui.container.classList.add('mp-is-playing');
 		}
 
 		if(currentTime) {
@@ -143,10 +143,10 @@ export default class CommonEvent {
 
 		if(btnMute) {
 			if(el.muted) {
-				btnMute.classList.add('is-muted');
+				btnMute.classList.add('mp-is-muted');
 				btnMute.innerHTML = btnMute.getAttribute('data-second-text');
 			} else {
-				btnMute.classList.remove('is-muted');
+				btnMute.classList.remove('mp-is-muted');
 				btnMute.innerHTML = btnMute.getAttribute('data-first-text');
 			}
 		}
@@ -201,7 +201,7 @@ export default class CommonEvent {
 	keydown(e) {
 		let player = this.player;
 
-		if(player.ui.container.classList.contains('is-focus')) {
+		if(player.ui.container.classList.contains('mp-is-focus')) {
 			switch(e.keyCode) {
 				case 32: // 스페이스바
 					e.preventDefault();
@@ -377,7 +377,7 @@ export default class CommonEvent {
 	 * @param {Event} e
 	 */
 	seeked(e) {
-		this.player.ui.container.classList.remove('is-seeking');
+		this.player.ui.container.classList.remove('mp-is-seeking');
 		this.callback(e);
 	}
 
@@ -386,7 +386,7 @@ export default class CommonEvent {
 	 * @param {Event} e
 	 */
 	seeking(e) {
-		this.player.ui.container.classList.add('is-seeking');
+		this.player.ui.container.classList.add('mp-is-seeking');
 		this.callback(e);
 	}
 

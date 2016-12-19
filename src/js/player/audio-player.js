@@ -36,25 +36,25 @@ export default class AudioPlayer extends PlayerWrapper {
 			el = player.el,
 			opt = player.opt,
 			container = player.ui.container,
-			progressBar = container.querySelector('.progress'),
-			volumeBar = container.querySelector('.volume'),
+			progressBar = container.querySelector('.mp-progress'),
+			volumeBar = container.querySelector('.mp-volume'),
 			progress = new Slider({el: progressBar}),
 			volume = new Slider({el: volumeBar});
 		
 		player.ui = Object.assign(player.ui, {
 			progressBar: progressBar,
-			buffered: progressBar.querySelector('.buffered'),
+			buffered: progressBar.querySelector('.mp-buffered'),
 			volumeBar: volumeBar,
 			progress: progress,
 			volume: volume,
-			currentTime: container.querySelector('.current-time'),
-			totalTime: container.querySelector('.total-time'),
-			btnPlay: container.querySelector('.btn-play'),
-			btnPause: container.querySelector('.btn-pause'),
-			btnPlayPause: container.querySelector('.btn-play-puase'),
-			btnStop: container.querySelector('.btn-stop'),
-			btnFullscreen: container.querySelector('.btn-fullscreen'),
-			btnMute: container.querySelector('.btn-mute')
+			currentTime: container.querySelector('.mp-current-time'),
+			totalTime: container.querySelector('.mp-total-time'),
+			btnPlay: container.querySelector('.mp-btn-play'),
+			btnPause: container.querySelector('.mp-btn-pause'),
+			btnPlayPause: container.querySelector('.mp-btn-play-puase'),
+			btnStop: container.querySelector('.mp-btn-stop'),
+			btnFullscreen: container.querySelector('.mp-btn-fullscreen'),
+			btnMute: container.querySelector('.mp-btn-mute')
 		});
 	}
 }
