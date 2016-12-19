@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.2.1-alpha.0
+ * @version v0.2.2-alpha.0
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -882,10 +882,10 @@
 				    el = player.el,
 				    opt = player.opt,
 				    container = player.ui.container,
-				    poster = container.querySelector('.poster'),
+				    poster = container.querySelector('.mp-poster'),
 				    posterSrc = el.getAttribute('poster'),
-				    progressBar = container.querySelector('.progress'),
-				    volumeBar = container.querySelector('.volume'),
+				    progressBar = container.querySelector('.mp-progress'),
+				    volumeBar = container.querySelector('.mp-volume'),
 				    progress = new _slider2.default({ el: progressBar }),
 				    volume = new _slider2.default({ el: volumeBar });
 
@@ -898,7 +898,7 @@
 
 				// flexible 옵션을 사용하거나 width 또는 height 값이 존재하면 유동사이즈 적용
 				if (opt.flexible || opt.width || opt.height) {
-					container.classList.add('flexible');
+					container.classList.add('mp-is-flexible');
 
 					if (opt.width) {
 						container.style.width = opt.width;
@@ -912,18 +912,18 @@
 				player.ui = _extends(player.ui, {
 					poster: poster,
 					progressBar: progressBar,
-					buffered: progressBar.querySelector('.buffered'),
+					buffered: progressBar.querySelector('.mp-buffered'),
 					volumeBar: volumeBar,
 					progress: progress,
 					volume: volume,
-					currentTime: container.querySelector('.current-time'),
-					totalTime: container.querySelector('.total-time'),
-					btnPlay: container.querySelector('.btn-play'),
-					btnPause: container.querySelector('.btn-pause'),
-					btnPlayPause: container.querySelector('.btn-play-puase'),
-					btnStop: container.querySelector('.btn-stop'),
-					btnFullscreen: container.querySelector('.btn-fullscreen'),
-					btnMute: container.querySelector('.btn-mute')
+					currentTime: container.querySelector('.mp-current-time'),
+					totalTime: container.querySelector('.mp-total-time'),
+					btnPlay: container.querySelector('.mp-btn-play'),
+					btnPause: container.querySelector('.mp-btn-pause'),
+					btnPlayPause: container.querySelector('.mp-btn-play-puase'),
+					btnStop: container.querySelector('.mp-btn-stop'),
+					btnFullscreen: container.querySelector('.mp-btn-fullscreen'),
+					btnMute: container.querySelector('.mp-btn-mute')
 				});
 			}
 		}]);
@@ -1038,7 +1038,7 @@
 				el.parentNode.insertBefore(wrapper, el);
 				wrapper.outerHTML = htmlString;
 				ui.container = el.previousElementSibling;
-				ui.container.querySelector('.media-el').appendChild(el);
+				ui.container.querySelector('.mp-media-el').appendChild(el);
 
 				// element manipulation
 				el.classList.add('el');
@@ -1047,7 +1047,7 @@
 				el.setAttribute('tabindex', '0');
 
 				if (_config.UA.indexOf('MSIE 9') > -1) {
-					ui.container.classList.add('is-ie9');
+					ui.container.classList.add('mp-is-ie9');
 				}
 
 				if (player.opt.contextmenu) {
@@ -1323,13 +1323,13 @@
 					this.player.el.removeAttribute('playsinline');
 					this.player.el.play();
 				} else {
-					if (container.classList.contains('is-fullscreen')) {
-						container.classList.remove('is-fullscreen');
-						btn.classList.remove('is-fullscreen');
+					if (container.classList.contains('mp-is-fullscreen')) {
+						container.classList.remove('mp-is-fullscreen');
+						btn.classList.remove('mp-is-fullscreen');
 						btn.innerHTML = btn.getAttribute('data-first-text');
 					} else {
-						container.classList.add('is-fullscreen');
-						btn.classList.add('is-fullscreen');
+						container.classList.add('mp-is-fullscreen');
+						btn.classList.add('mp-is-fullscreen');
 						btn.innerHTML = btn.getAttribute('data-second-text');
 					}
 				}
@@ -1347,13 +1347,13 @@
 				var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 
 				if (Boolean(fullscreenElement) === false) {
-					container.classList.remove('is-fullscreen');
-					btn.classList.remove('is-fullscreen');
+					container.classList.remove('mp-is-fullscreen');
+					btn.classList.remove('mp-is-fullscreen');
 					btn.innerHTML = btn.getAttribute('data-first-text');
 				}
 				if (Boolean(fullscreenElement) === true && fullscreenElement == container) {
-					container.classList.add('is-fullscreen');
-					btn.classList.add('is-fullscreen');
+					container.classList.add('mp-is-fullscreen');
+					btn.classList.add('mp-is-fullscreen');
 					btn.innerHTML = btn.getAttribute('data-second-text');
 				}
 			}
@@ -1491,13 +1491,13 @@
 					return _this.player.el.addEventListener(eventName, _this[eventName].bind(_this), false);
 				});
 
-				// 내부에 포커스되면 is-focus 추가
+				// 내부에 포커스되면 mp-is-focus 추가
 				[].forEach.call(this.player.ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
 					el.addEventListener('focus', function () {
-						return _this.player.ui.container.classList.add('is-focus');
+						return _this.player.ui.container.classList.add('mp-is-focus');
 					});
 					el.addEventListener('blur', function () {
-						return _this.player.ui.container.classList.remove('is-focus');
+						return _this.player.ui.container.classList.remove('mp-is-focus');
 					});
 				});
 
@@ -1603,18 +1603,18 @@
 
 				if (btnPlayPause) {
 					if (el.paused) {
-						btnPlayPause.classList.remove('is-paused');
+						btnPlayPause.classList.remove('mp-is-paused');
 						btnPlayPause.innerHTML = btnPlayPause.getAttribute('data-first-text');
 					} else {
-						btnPlayPause.classList.add('is-paused');
+						btnPlayPause.classList.add('mp-is-paused');
 						btnPlayPause.innerHTML = btnPlayPause.getAttribute('data-second-text');
 					}
 				}
 
 				if (el.paused) {
-					player.ui.container.classList.remove('is-playing');
+					player.ui.container.classList.remove('mp-is-playing');
 				} else {
-					player.ui.container.classList.add('is-playing');
+					player.ui.container.classList.add('mp-is-playing');
 				}
 
 				if (currentTime) {
@@ -1627,10 +1627,10 @@
 
 				if (btnMute) {
 					if (el.muted) {
-						btnMute.classList.add('is-muted');
+						btnMute.classList.add('mp-is-muted');
 						btnMute.innerHTML = btnMute.getAttribute('data-second-text');
 					} else {
-						btnMute.classList.remove('is-muted');
+						btnMute.classList.remove('mp-is-muted');
 						btnMute.innerHTML = btnMute.getAttribute('data-first-text');
 					}
 				}
@@ -1694,7 +1694,7 @@
 			value: function keydown(e) {
 				var player = this.player;
 
-				if (player.ui.container.classList.contains('is-focus')) {
+				if (player.ui.container.classList.contains('mp-is-focus')) {
 					switch (e.keyCode) {
 						case 32:
 							// 스페이스바
@@ -1927,7 +1927,7 @@
 		}, {
 			key: 'seeked',
 			value: function seeked(e) {
-				this.player.ui.container.classList.remove('is-seeking');
+				this.player.ui.container.classList.remove('mp-is-seeking');
 				this.callback(e);
 			}
 
@@ -1939,7 +1939,7 @@
 		}, {
 			key: 'seeking',
 			value: function seeking(e) {
-				this.player.ui.container.classList.add('is-seeking');
+				this.player.ui.container.classList.add('mp-is-seeking');
 				this.callback(e);
 			}
 
@@ -2662,25 +2662,25 @@
 				    el = player.el,
 				    opt = player.opt,
 				    container = player.ui.container,
-				    progressBar = container.querySelector('.progress'),
-				    volumeBar = container.querySelector('.volume'),
+				    progressBar = container.querySelector('.mp-progress'),
+				    volumeBar = container.querySelector('.mp-volume'),
 				    progress = new _slider2.default({ el: progressBar }),
 				    volume = new _slider2.default({ el: volumeBar });
 
 				player.ui = _extends(player.ui, {
 					progressBar: progressBar,
-					buffered: progressBar.querySelector('.buffered'),
+					buffered: progressBar.querySelector('.mp-buffered'),
 					volumeBar: volumeBar,
 					progress: progress,
 					volume: volume,
-					currentTime: container.querySelector('.current-time'),
-					totalTime: container.querySelector('.total-time'),
-					btnPlay: container.querySelector('.btn-play'),
-					btnPause: container.querySelector('.btn-pause'),
-					btnPlayPause: container.querySelector('.btn-play-puase'),
-					btnStop: container.querySelector('.btn-stop'),
-					btnFullscreen: container.querySelector('.btn-fullscreen'),
-					btnMute: container.querySelector('.btn-mute')
+					currentTime: container.querySelector('.mp-current-time'),
+					totalTime: container.querySelector('.mp-total-time'),
+					btnPlay: container.querySelector('.mp-btn-play'),
+					btnPause: container.querySelector('.mp-btn-pause'),
+					btnPlayPause: container.querySelector('.mp-btn-play-puase'),
+					btnStop: container.querySelector('.mp-btn-stop'),
+					btnFullscreen: container.querySelector('.mp-btn-fullscreen'),
+					btnMute: container.querySelector('.mp-btn-mute')
 				});
 			}
 		}]);
