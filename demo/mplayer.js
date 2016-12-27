@@ -1050,6 +1050,10 @@
 					ui.container.classList.add('mp-is-ie9');
 				}
 
+				if (_config.IOS) {
+					ui.container.classList.add('mp-is-ios');
+				}
+
 				if (player.opt.contextmenu) {
 					ui.contextmenu = new _contextmenu2.default(_config.DEFAULT_CONTEXT_MENU, player);
 				}

@@ -27,6 +27,7 @@
 .mplayer-basic .mp-time-wrap { padding-left: 15px; line-height: 11px; font-family: tahoma; font-size: 9px; color: #8f8f8f; text-shadow: 0 1px 0 #030303; white-space: nowrap; }
 .mplayer-basic .mp-volume-wrap { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; width: 100px; padding: 17px 15px 0; white-space: nowrap; }
 .mplayer-basic .mp-volume-wrap .mp-volume { width: 50px; }
+.mplayer-basic.mp-is-ios .mp-volume-wrap { display: none; }
 .mplayer-basic .mp-btn-mute { width: 14px; height: 12px; margin-right: 3px; color: transparent; background: url("img/ico-volume.png") no-repeat; border: 0 none; overflow: hidden; cursor: pointer; }
 .mplayer-basic .mp-btn-mute.mp-is-muted { background-image: url("img/ico-volume-off.png"); }
 .mplayer-basic .mp-btn-fullscreen { width: 50px; height: 45px; color: transparent; background: url("img/ico-fullscreen.png") no-repeat 50% 50%; border: 0 none; overflow: hidden; cursor: pointer; }
