@@ -1,6 +1,6 @@
 'use strict';
 
-import { DEFAULT_OPTIONS, DEFAULT_CONTEXT_MENU, UA, SCRIPT_PATH } from '../config';
+import { DEFAULT_OPTIONS, DEFAULT_CONTEXT_MENU, UA, IOS, SCRIPT_PATH } from '../config';
 import VideoEvent from '../event/video-event';
 import AudioEvent from '../event/audio-event';
 import ContextMenu from '../ui/contextmenu';
@@ -78,6 +78,10 @@ export default class PlayerWrapper {
 
 		if(UA.indexOf('MSIE 9') > -1) {
 			ui.container.classList.add('mp-is-ie9');
+		}
+
+		if(IOS) {
+			ui.container.classList.add('mp-is-ios');
 		}
 
 		if(player.opt.contextmenu) {

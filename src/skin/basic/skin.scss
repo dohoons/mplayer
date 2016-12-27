@@ -242,6 +242,11 @@
 		}
 	}
 
+	// iOS일때 볼륨콘트롤 숨김
+	&.mp-is-ios .mp-volume-wrap {
+		display: none;
+	}
+
 	.mp-btn-mute {
 		width: 14px;
 		height: 12px;
