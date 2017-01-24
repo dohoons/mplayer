@@ -1,8 +1,8 @@
 # MPlayer : HTML5 Media Player
 - HTML5 video/audio Player
 - ES6 + babel + webpack
-- 디자인 스킨 옵션
-- 알파버전 : 기능 개발 및 테스트 중..
+- 디자인 스킨 옵션 (스킨스타일 자동 로드)
+- 알파버전 : 기능 개발 및 테스트 중.. (로컬환경에서 실행가능)
 
 ## 기본 사용법
 ``` html
@@ -10,7 +10,6 @@
 	<source src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" type="video/mp4">
 </video>
 
-<link rel="stylesheet" href="./mplayer/skin/mplayer-basic/skin.min.css">
 <script src="./mplayer/mplayer.min.js"></script>
 
 <script>
