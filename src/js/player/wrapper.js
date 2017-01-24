@@ -38,11 +38,21 @@ export default class PlayerWrapper {
 	loadInterface(callback) {
 		let player = this.player,
 			type = (player.isVideo) ? 'video' : 'audio',
-			loader = document.createElement('script');
+			loader = document.createElement('script'),
+			skinPath = `${SCRIPT_PATH}/skin/${player.opt.skin}`;
 
 		// 스킨 로드
-		loader.src = `${SCRIPT_PATH}/skin/${player.opt.skin}/tpl.${type}.js`;
+		loader.src = `${skinPath}/tpl.${type}.js`;
 		player.el.parentNode.insertBefore(loader, player.el);
+
+		// 문서에 해당 스킨 css가 존재하지 않으면 append
+		if(document.querySelectorAll(`link[href*="${skinPath}"]`).length === 0) {
+			let cssLink = document.createElement('link');
+			cssLink.setAttribute('rel', 'stylesheet');
+			cssLink.setAttribute('href', `${skinPath}/skin.min.css`);
+
+			document.body.appendChild(cssLink);
+		}
 
 		// Promise polyfill 너무 무거워서 콜백 함수로 처리
 		if(typeof callback === 'function') {
