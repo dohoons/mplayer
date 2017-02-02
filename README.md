@@ -17,23 +17,22 @@ var player = new MPlayer('#my-video'); // default
 </script>
 ```
 ## 데모
-- https://dohoons.github.io/mplayer/demo/
+> https://dohoons.github.io/mplayer/demo/
+
 
 ## 개발환경
-- 의존성
+### 의존성
 ``` sh
 $ npm install -global gulp
 ```
-- 설치
+### 설치
 ``` sh
 $ git clone https://github.com/dohoons/mplayer.git
 $ npm install
 ```
-- 기본 태스크
-``` sh
-$ gulp
-```
-- API 문서 생성
-``` sh
-$ gulp doc
-```
+### Task
+| 명령어 | 설명 |
+| ------ | ----------- |
+| gulp   | 빌드 및 웹서버 시작하고 watch |
+| gulp build | 빌드 |
+| gulp doc    | API 문서 생성 |
