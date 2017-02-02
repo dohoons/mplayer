@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.2.3-alpha.0
+ * @version v0.2.3-alpha.1
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -1501,19 +1501,25 @@
 			value: function on() {
 				var _this = this;
 
+				var container = this.player.ui.container;
+
 				_config.ELEMENT_EVENT_LIST.forEach(function (eventName) {
 					return _this.player.el.addEventListener(eventName, _this[eventName].bind(_this), false);
 				});
 
-				// 내부에 포커스되면 mp-is-focus 추가
-				[].forEach.call(this.player.ui.container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
-					el.addEventListener('focus', function () {
-						return _this.player.ui.container.classList.add('mp-is-focus');
-					});
-					el.addEventListener('blur', function () {
-						return _this.player.ui.container.classList.remove('mp-is-focus');
-					});
+				// 내부에 포커스되면 플레이어 활성화. 일정시간 이후 해제
+				[].forEach.call(container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+					el.addEventListener('focus', _this.activeFocus.bind(_this));
 				});
+
+				// 플레이어 활성화. 일정시간 이후 해제
+				// 마우스아웃해도 해제
+				container.addEventListener('mousemove', this.active.bind(this), false);
+				container.addEventListener('touchmove', this.active.bind(this), false);
+				container.addEventListener('touchstart', this.active.bind(this), false);
+				container.addEventListener('mouseout', function () {
+					return container.classList.remove('mp-is-active');
+				}, false);
 
 				this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
 
@@ -1681,6 +1687,42 @@
 						container.classList.remove(minwidth.value);
 					}
 				}
+			}
+
+			/**
+	   * 활성화 될때
+	   */
+
+		}, {
+			key: 'active',
+			value: function active() {
+				var container = this.player.ui.container;
+
+				container.classList.remove('mp-is-active-focus');
+				container.classList.add('mp-is-active');
+
+				clearTimeout(container.timer);
+				container.timer = setTimeout(function () {
+					return container.classList.remove('mp-is-active');
+				}, 2000);
+			}
+
+			/**
+	   * 포커스되어 활성화될 때
+	   */
+
+		}, {
+			key: 'activeFocus',
+			value: function activeFocus() {
+				var container = this.player.ui.container;
+
+				container.classList.remove('mp-is-active');
+				container.classList.add('mp-is-active-focus');
+
+				clearTimeout(container.timer);
+				container.timer = setTimeout(function () {
+					return container.classList.remove('mp-is-active-focus');
+				}, 2000);
 			}
 
 			/**

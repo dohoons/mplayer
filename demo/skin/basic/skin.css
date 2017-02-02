@@ -1,7 +1,7 @@
 .mplayer-basic { box-sizing: border-box; display: inline-block; text-align: left; line-height: 1; background: #000; border: 1px solid #030303; position: relative; overflow: hidden; }
 .mplayer-basic * { box-sizing: border-box; }
 .mplayer-basic .mp-media-el { height: 100%; }
-.mplayer-basic .mp-media-el video { display: block; }
+.mplayer-basic .mp-media-el video { display: block; outline: 0 none; }
 .mplayer-basic.mp-is-flexible { width: 100%; height: 100%; }
 .mplayer-basic.mp-is-flexible video { width: 100%; height: 100%; position: absolute; }
 .mplayer-basic.mp-is-fullscreen { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 999999; }
@@ -12,8 +12,8 @@
 .mplayer-basic .mp-controls > * { vertical-align: top; box-shadow: inset -1px 1px 0 rgba(255, 255, 255, 0.1); }
 .mplayer-basic .mp-controls > *:not(:last-child) { border-right: 1px solid #030303; }
 .mplayer-basic.mp-is-playing .mp-controls { opacity: 0; bottom: -46px; }
-.mplayer-basic:hover .mp-controls { opacity: 1; bottom: 0; -webkit-transition: all .4s .3s; transition: all .4s .3s; }
-.mplayer-basic.mp-is-focus .mp-controls { opacity: 1; bottom: 0; -webkit-transition: none; transition: none; }
+.mplayer-basic.mp-is-playing.mp-is-active .mp-controls { opacity: 1; bottom: 0; -webkit-transition: all .4s .3s; transition: all .4s .3s; }
+.mplayer-basic.mp-is-playing.mp-is-active-focus .mp-controls { opacity: 1; bottom: 0; -webkit-transition: none; transition: none; }
 .mplayer-basic .mp-btn-play-puase { width: 50px; height: 45px; color: transparent; background: url("img/ico-play.png") no-repeat 50% 50%; border: 0 none; overflow: hidden; cursor: pointer; }
 .mplayer-basic .mp-btn-play-puase.mp-is-paused { background-image: url("img/ico-pause.png"); }
 .mplayer-basic .mp-slider { -webkit-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1; width: 100%; height: 11px; margin: 0 8px; position: relative; z-index: 1; }
