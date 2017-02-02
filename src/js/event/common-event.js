@@ -23,15 +23,23 @@ export default class CommonEvent {
 	 * 플레이어 이벤트 등록
 	 */
 	on() {
+		let container = this.player.ui.container;
+
 		ELEMENT_EVENT_LIST.forEach(
 			eventName => this.player.el.addEventListener(eventName, this[eventName].bind(this), false)
 		);
 
-		// 내부에 포커스되면 mp-is-focus 추가
-		[].forEach.call(this.player.ui.container.querySelectorAll('a, button, input, [tabindex]'), el => {
-			el.addEventListener('focus', () => this.player.ui.container.classList.add('mp-is-focus'));
-			el.addEventListener('blur', () => this.player.ui.container.classList.remove('mp-is-focus'));
+		// 내부에 포커스되면 플레이어 활성화. 일정시간 이후 해제
+		[].forEach.call(container.querySelectorAll('a, button, input, [tabindex]'), el => {
+			el.addEventListener('focus', this.activeFocus.bind(this));
 		});
+
+		// 플레이어 활성화. 일정시간 이후 해제
+		// 마우스아웃해도 해제
+		container.addEventListener('mousemove', this.active.bind(this), false);
+		container.addEventListener('touchmove', this.active.bind(this), false);
+		container.addEventListener('touchstart', this.active.bind(this), false);
+		container.addEventListener('mouseout', () => container.classList.remove('mp-is-active'), false);
 
 		this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
 
@@ -180,6 +188,32 @@ export default class CommonEvent {
 				container.classList.remove(minwidth.value);
 			}
 		}
+	}
+
+	/**
+	 * 활성화 될때
+	 */
+	active() {
+		let container = this.player.ui.container;
+
+		container.classList.remove('mp-is-active-focus');
+		container.classList.add('mp-is-active');
+
+		clearTimeout(container.timer);
+		container.timer = setTimeout(() => container.classList.remove('mp-is-active'), 2000);
+	}
+
+	/**
+	 * 포커스되어 활성화될 때
+	 */
+	activeFocus() {
+		let container = this.player.ui.container;
+
+		container.classList.remove('mp-is-active');
+		container.classList.add('mp-is-active-focus');
+
+		clearTimeout(container.timer);
+		container.timer = setTimeout(() => container.classList.remove('mp-is-active-focus'), 2000);
 	}
 
 	/**
