@@ -26,6 +26,7 @@
 
 		video {
 			display: block;
+			outline: 0 none;
 		}
 	}
 
@@ -95,13 +96,13 @@
 		bottom: -($btn-height + 1);
 	}
 
-	&:hover .mp-controls {
+	&.mp-is-playing.mp-is-active .mp-controls {
 		opacity: 1;
 		bottom: 0;
 		transition: all .4s .3s;
 	}
 
-	&.mp-is-focus .mp-controls {
+	&.mp-is-playing.mp-is-active-focus .mp-controls {
 		opacity: 1;
 		bottom: 0;
 		transition: none;
