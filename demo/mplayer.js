@@ -1701,8 +1701,8 @@
 				container.classList.remove('mp-is-active-focus');
 				container.classList.add('mp-is-active');
 
-				clearTimeout(container.timer);
-				container.timer = setTimeout(function () {
+				clearTimeout(container.activeTimer);
+				container.activeTimer = setTimeout(function () {
 					return container.classList.remove('mp-is-active');
 				}, 2000);
 			}
@@ -1719,8 +1719,8 @@
 				container.classList.remove('mp-is-active');
 				container.classList.add('mp-is-active-focus');
 
-				clearTimeout(container.timer);
-				container.timer = setTimeout(function () {
+				clearTimeout(container.activeTimer);
+				container.activeTimer = setTimeout(function () {
 					return container.classList.remove('mp-is-active-focus');
 				}, 2000);
 			}
@@ -1983,7 +1983,12 @@
 		}, {
 			key: 'seeked',
 			value: function seeked(e) {
-				this.player.ui.container.classList.remove('mp-is-seeking');
+				var _this4 = this;
+
+				clearTimeout(this.player.ui.container.seekTimer);
+				this.player.ui.container.seekTimer = setTimeout(function () {
+					return _this4.player.ui.container.classList.remove('mp-is-seeking');
+				}, 800);
 				this.callback(e);
 			}
 
