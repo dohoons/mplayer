@@ -199,8 +199,8 @@ export default class CommonEvent {
 		container.classList.remove('mp-is-active-focus');
 		container.classList.add('mp-is-active');
 
-		clearTimeout(container.timer);
-		container.timer = setTimeout(() => container.classList.remove('mp-is-active'), 2000);
+		clearTimeout(container.activeTimer);
+		container.activeTimer = setTimeout(() => container.classList.remove('mp-is-active'), 2000);
 	}
 
 	/**
@@ -212,8 +212,8 @@ export default class CommonEvent {
 		container.classList.remove('mp-is-active');
 		container.classList.add('mp-is-active-focus');
 
-		clearTimeout(container.timer);
-		container.timer = setTimeout(() => container.classList.remove('mp-is-active-focus'), 2000);
+		clearTimeout(container.activeTimer);
+		container.activeTimer = setTimeout(() => container.classList.remove('mp-is-active-focus'), 2000);
 	}
 
 	/**
@@ -411,7 +411,8 @@ export default class CommonEvent {
 	 * @param {Event} e
 	 */
 	seeked(e) {
-		this.player.ui.container.classList.remove('mp-is-seeking');
+		clearTimeout(this.player.ui.container.seekTimer);
+		this.player.ui.container.seekTimer = setTimeout(() => this.player.ui.container.classList.remove('mp-is-seeking'), 800);
 		this.callback(e);
 	}
 

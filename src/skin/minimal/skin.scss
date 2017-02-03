@@ -99,7 +99,7 @@
 	&.mp-is-playing.mp-is-active .mp-controls {
 		opacity: 1;
 		bottom: 0;
-		transition: all .4s .3s;
+		transition: all .4s .15s;
 	}
 
 	&.mp-is-playing.mp-is-active-focus .mp-controls {
@@ -383,6 +383,7 @@
 		}
 
 		.mp-time-wrap {
+			display: none;
 			width: auto;
 			padding: 0;
 			line-height: 1.2;
@@ -394,13 +395,10 @@
 			position: absolute;
 			bottom: $btn-height + 13;
 			left: 50%;
-			transition: opacity .4s .7s;
-			opacity: 0;
 		}
 
 		&.mp-is-seeking .mp-time-wrap {
-			opacity: 1;
-			transition: opacity .4s;
+			display: block;
 		}
 		
 		.mp-volume-wrap {
