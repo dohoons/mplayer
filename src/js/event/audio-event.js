@@ -38,11 +38,7 @@ class AudioUIEvent {
 
 	/** 재생/일시정지 토글 클릭 */
 	btnPlayPause() {
-		if(this.player.el.paused) {
-			this.player.play();
-		} else {
-			this.player.pause();
-		}
+		this.player.togglePlay();
 	}
 
 	/** 정지 버튼 클릭 */

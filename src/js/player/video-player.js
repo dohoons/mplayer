@@ -65,6 +65,7 @@ export default class VideoPlayer extends PlayerWrapper {
 		
 		player.ui = Object.assign(player.ui, {
 			poster: poster,
+			videoWrap: container.querySelector('.mp-media-el'),
 			progressBar: progressBar,
 			buffered: progressBar.querySelector('.mp-buffered'),
 			volumeBar: volumeBar,
