@@ -31,7 +31,9 @@ export default class CommonEvent {
 
 		// 내부에 포커스되면 플레이어 활성화. 일정시간 이후 해제
 		[].forEach.call(container.querySelectorAll('a, button, input, [tabindex]'), el => {
+			el.addEventListener('focus', () => this.player.ui.container.classList.add('mp-is-focus'));
 			el.addEventListener('focus', this.activeFocus.bind(this));
+ -			el.addEventListener('blur', () => this.player.ui.container.classList.remove('mp-is-focus'));
 		});
 
 		// 플레이어 활성화. 일정시간 이후 해제
@@ -264,18 +266,6 @@ export default class CommonEvent {
 					break;
 			}
 		}
-	}
-
-	/**
-	 * element click
-	 */
-	click() {
-		if(this.player.el.paused) {
-			this.player.play();
-		} else {
-			this.player.pause();
-		}
-		this.player.el.focus();
 	}
 
 	/**

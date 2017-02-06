@@ -40,11 +40,7 @@ class VideoUIEvent {
 
 	/** 재생/일시정지 토글 클릭 */
 	btnPlayPause() {
-		if(this.player.el.paused) {
-			this.player.play();
-		} else {
-			this.player.pause();
-		}
+		this.player.togglePlay();
 	}
 
 	/** 정지 버튼 클릭 */
@@ -52,8 +48,14 @@ class VideoUIEvent {
 		this.player.stop();
 	}
 
+	/** 영상영역 클릭 */
+	videoClick() {
+		this.player.togglePlay();
+		this.player.el.focus();
+	}
+
 	/** 포스터 클릭 */
-	poster() {
+	posterClick() {
 		this.player.play();
 		this.player.el.focus();
 	}
@@ -192,7 +194,10 @@ class VideoEvent extends CommonEvent {
 			ui.btnStop.addEventListener('click', this.uiEvents.btnStop.bind(this), false);
 		}
 		if(ui.poster) {
-			ui.poster.addEventListener('click', this.uiEvents.poster.bind(this), false);
+			ui.poster.addEventListener('click', this.uiEvents.posterClick.bind(this), false);
+		}
+		if(ui.videoWrap) {
+			ui.videoWrap.addEventListener('click', this.uiEvents.videoClick.bind(this), false);
 		}
 		if(ui.btnMute) {
 			ui.btnMute.addEventListener('click', this.uiEvents.btnToggleMute.bind(this), false);
