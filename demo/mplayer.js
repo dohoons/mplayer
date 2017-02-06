@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.2.3-alpha.1
+ * @version v0.2.3-alpha.2
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -532,7 +532,7 @@
 	var IOS = /iPad|iPhone|iPod/.test(UA);
 	var SUPPORT_FS = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled || document.mozFullScreenEnabled;
 	var FSCHANGE_EVENT_LIST = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
-	var ELEMENT_EVENT_LIST = ['click', 'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
+	var ELEMENT_EVENT_LIST = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
 	var SCRIPT_PATH = (0, _util.getCurrentScriptPath)();
 
 	module.exports = {
@@ -911,6 +911,7 @@
 
 				player.ui = _extends(player.ui, {
 					poster: poster,
+					videoWrap: container.querySelector('.mp-media-el'),
 					progressBar: progressBar,
 					buffered: progressBar.querySelector('.mp-buffered'),
 					volumeBar: volumeBar,
@@ -1215,11 +1216,7 @@
 		}, {
 			key: 'btnPlayPause',
 			value: function btnPlayPause() {
-				if (this.player.el.paused) {
-					this.player.play();
-				} else {
-					this.player.pause();
-				}
+				this.player.togglePlay();
 			}
 
 			/** 정지 버튼 클릭 */
@@ -1230,11 +1227,20 @@
 				this.player.stop();
 			}
 
+			/** 영상영역 클릭 */
+
+		}, {
+			key: 'videoClick',
+			value: function videoClick() {
+				this.player.togglePlay();
+				this.player.el.focus();
+			}
+
 			/** 포스터 클릭 */
 
 		}, {
-			key: 'poster',
-			value: function poster() {
+			key: 'posterClick',
+			value: function posterClick() {
 				this.player.play();
 				this.player.el.focus();
 			}
@@ -1407,7 +1413,10 @@
 					ui.btnStop.addEventListener('click', this.uiEvents.btnStop.bind(this), false);
 				}
 				if (ui.poster) {
-					ui.poster.addEventListener('click', this.uiEvents.poster.bind(this), false);
+					ui.poster.addEventListener('click', this.uiEvents.posterClick.bind(this), false);
+				}
+				if (ui.videoWrap) {
+					ui.videoWrap.addEventListener('click', this.uiEvents.videoClick.bind(this), false);
 				}
 				if (ui.btnMute) {
 					ui.btnMute.addEventListener('click', this.uiEvents.btnToggleMute.bind(this), false);
@@ -1509,7 +1518,13 @@
 
 				// 내부에 포커스되면 플레이어 활성화. 일정시간 이후 해제
 				[].forEach.call(container.querySelectorAll('a, button, input, [tabindex]'), function (el) {
+					el.addEventListener('focus', function () {
+						return _this.player.ui.container.classList.add('mp-is-focus');
+					});
 					el.addEventListener('focus', _this.activeFocus.bind(_this));
+					-el.addEventListener('blur', function () {
+						return _this.player.ui.container.classList.remove('mp-is-focus');
+					});
 				});
 
 				// 플레이어 활성화. 일정시간 이후 해제
@@ -1785,21 +1800,6 @@
 							break;
 					}
 				}
-			}
-
-			/**
-	   * element click
-	   */
-
-		}, {
-			key: 'click',
-			value: function click() {
-				if (this.player.el.paused) {
-					this.player.play();
-				} else {
-					this.player.pause();
-				}
-				this.player.el.focus();
 			}
 
 			/**
@@ -2151,11 +2151,7 @@
 		}, {
 			key: 'btnPlayPause',
 			value: function btnPlayPause() {
-				if (this.player.el.paused) {
-					this.player.play();
-				} else {
-					this.player.pause();
-				}
+				this.player.togglePlay();
 			}
 
 			/** 정지 버튼 클릭 */
