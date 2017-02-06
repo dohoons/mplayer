@@ -1,4 +1,5 @@
-.mplayer-basic { box-sizing: border-box; display: inline-block; text-align: left; line-height: 1; background: #000; border: 1px solid #030303; position: relative; overflow: hidden; }
+@charset "UTF-8";
+.mplayer-basic { box-sizing: border-box; display: inline-block; text-align: left; line-height: 1; background: #000; border: 1px solid #030303; position: relative; overflow: hidden; /* 센터 플레이 아이콘 */ }
 .mplayer-basic * { box-sizing: border-box; }
 .mplayer-basic .mp-media-el { height: 100%; }
 .mplayer-basic .mp-media-el video { display: block; outline: 0 none; }
@@ -8,6 +9,8 @@
 .mplayer-basic.mp-is-fullscreen video { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
 .mplayer-basic .mp-poster { width: 100%; height: 100%; background-size: cover; background-position: 50%; position: absolute; top: 0; left: 0; cursor: pointer; }
 .mplayer-basic .mp-poster.mp-hide { display: none; }
+.mplayer-basic .mp-media-el:after, .mplayer-basic .mp-poster:after { content: ''; box-sizing: border-box; display: block; width: 80px; height: 80px; margin: -40px 0 0 -40px; background: rgba(0, 0, 0, 0.4) url("img/ico-play-large.png") no-repeat 62% 50%; border-radius: 40px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); opacity: 0; position: absolute; top: 50%; left: 50%; -webkit-transition: all .2s; transition: all .2s; -webkit-transform: scale(1.3); -ms-transform: scale(1.3); transform: scale(1.3); }
+.mplayer-basic:not(.mp-is-playing) .mp-media-el:after, .mplayer-basic:not(.mp-is-playing) .mp-poster:after { opacity: 1; -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1); }
 .mplayer-basic .mp-controls { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; width: 100%; font-size: 0; background: #030303; background: -webkit-linear-gradient(top, #212121 0%, #030303 100%); background: linear-gradient(to bottom, #212121 0%, #030303 100%); border-top: 1px solid #030303; position: absolute; bottom: 0; left: 0; -webkit-transition: all .4s .7s; transition: all .4s .7s; }
 .mplayer-basic .mp-controls > * { vertical-align: top; box-shadow: inset -1px 1px 0 rgba(255, 255, 255, 0.1); }
 .mplayer-basic .mp-controls > *:not(:last-child) { border-right: 1px solid #030303; }
@@ -45,6 +48,8 @@
 .mplayer-basic.mp-is-ie9 .mp-volume-wrap { width: 20px !important; font-size: 0; }
 .mplayer-basic.mp-is-ie9 .mp-volume { display: inline-block; vertical-align: top; }
 .mplayer-basic.mp-is-ie9 .mp-btn-mute { display: inline-block; vertical-align: top; }
+.mplayer-basic.mp-is-small .mp-media-el:after, .mplayer-basic.mp-is-small .mp-poster:after { -webkit-transform: scale(0.8); -ms-transform: scale(0.8); transform: scale(0.8); }
+.mplayer-basic.mp-is-small:not(.mp-is-playing) .mp-media-el:after, .mplayer-basic.mp-is-small:not(.mp-is-playing) .mp-poster:after { -webkit-transform: scale(0.6); -ms-transform: scale(0.6); transform: scale(0.6); }
 .mplayer-basic.mp-is-small .mp-btn-play-puase { width: 33px; height: 33px; }
 .mplayer-basic.mp-is-small .mp-progress-wrap { padding: 11px 10px 0; }
 .mplayer-basic.mp-is-small .mp-time-wrap { display: none; width: auto; padding: 0; line-height: 1.2; text-align: center; font-size: 20px; color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.7); -webkit-transform: translateX(-50%); -ms-transform: translateX(-50%); transform: translateX(-50%); position: absolute; bottom: 46px; left: 50%; }
