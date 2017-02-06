@@ -74,6 +74,33 @@
 			display: none;
 		}
 	}
+	
+	/* 센터 플레이 아이콘 */
+	.mp-media-el:after,
+	.mp-poster:after {
+		content: '';
+		box-sizing: border-box;
+		display: block;
+		width: 120px;
+		height: 120px;
+		margin: -60px 0 0 -60px;
+		background: rgba(255,255,255,0) url('img/ico-play-large.png') no-repeat 61% 50%;
+		border-radius: 60px;
+		box-shadow: 0 0 15px rgba(0,0,0,.3);
+		border: 5px solid rgba(255,255,255,.3);
+		opacity: 0;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transition: all .2s;
+		transform: scale(1);
+	}
+
+	&:not(.mp-is-playing) .mp-media-el:after,
+	&:not(.mp-is-playing) .mp-poster:after {
+		opacity: 1;
+		transform: scale(.8);
+	}
 
 	.mp-controls {
 		display: flex;
@@ -376,6 +403,16 @@
 		$btn-width: 33px;
 		$btn-height: 35px;
 		// ----------------------------------------------
+	
+		.mp-media-el:after,
+		.mp-poster:after {
+			transform: scale(.7);
+		}
+
+		&:not(.mp-is-playing) .mp-media-el:after,
+		&:not(.mp-is-playing) .mp-poster:after {
+			transform: scale(.5);
+		}
 
 		.mp-btn-play-puase {
 			width: $btn-width;
