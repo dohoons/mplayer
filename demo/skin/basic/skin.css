@@ -6,7 +6,7 @@
 .mplayer-basic.mp-is-flexible { width: 100%; height: 100%; }
 .mplayer-basic.mp-is-flexible video { width: 100%; height: 100%; position: absolute; }
 .mplayer-basic.mp-is-fullscreen { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 999999; }
-.mplayer-basic.mp-is-fullscreen video { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
+.mplayer-basic.mp-is-fullscreen video { width: 100%; height: 100%; }
 .mplayer-basic .mp-poster { width: 100%; height: 100%; background-size: cover; background-position: 50%; position: absolute; top: 0; left: 0; cursor: pointer; }
 .mplayer-basic .mp-poster.mp-hide { display: none; }
 .mplayer-basic .mp-media-el:after, .mplayer-basic .mp-poster:after { content: ''; box-sizing: border-box; display: block; width: 80px; height: 80px; margin: -40px 0 0 -40px; background: rgba(0, 0, 0, 0.4) url("img/ico-play-large.png") no-repeat 62% 50%; border-radius: 40px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); border: 1px solid rgba(0, 0, 0, 0.3); opacity: 0; position: absolute; top: 50%; left: 50%; -webkit-transition: all .2s; transition: all .2s; -webkit-transform: scale(1.3); -ms-transform: scale(1.3); transform: scale(1.3); }

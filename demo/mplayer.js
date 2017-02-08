@@ -2434,7 +2434,8 @@
 					top = bottomLimit;
 				}
 
-				el.setAttribute('style', 'top:' + top + 'px; left:' + left + 'px');
+				el.style.top = top + 'px';
+				el.style.left = left + 'px';
 			}
 		}]);
 
