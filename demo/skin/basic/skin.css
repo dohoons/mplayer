@@ -3,6 +3,7 @@
 .mplayer-basic * { box-sizing: border-box; }
 .mplayer-basic .mp-media-el { height: 100%; }
 .mplayer-basic .mp-media-el video { display: block; outline: 0 none; }
+.mplayer-basic .mp-media-el video::-webkit-media-controls { display: none; }
 .mplayer-basic.mp-is-flexible { width: 100%; height: 100%; }
 .mplayer-basic.mp-is-flexible video { width: 100%; height: 100%; position: absolute; }
 .mplayer-basic.mp-is-fullscreen { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 999999; }
