@@ -167,8 +167,8 @@ export default class CommonEvent {
 	 */
 	updateSizeOption() {
 		let container = this.player.ui.container,
-			maxwidth = getMatchAttr.call(container, 'data-maxwidth-'),
-			minwidth = getMatchAttr.call(container, 'data-minwidth-'),
+			maxwidth = getMatchAttr(container, 'data-maxwidth-'),
+			minwidth = getMatchAttr(container, 'data-minwidth-'),
 			size = 0;
 		
 		if(maxwidth !== null) {

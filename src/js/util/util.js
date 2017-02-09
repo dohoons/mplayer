@@ -18,11 +18,12 @@ module.exports.sec2str = function(str) {
 /**
  * 엘리먼트 속성에 대해 검색어로 시작하는 속성일 경우 오브젝트 리턴
  * 
+ * @param {Element} el 기준 엘리먼트
  * @param {String} str 검색할 스트링
  * @returns {Object}
  */
-module.exports.getMatchAttr = function(str) {
-	let attrs = this.attributes;
+module.exports.getMatchAttr = function(el, str) {
+	let attrs = el.attributes;
 	for (let i = attrs.length; i--; ) {
 		if (attrs[i].nodeName.indexOf(str) === 0) {
 			return { 
