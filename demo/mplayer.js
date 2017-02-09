@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.2.3-alpha.2
+ * @version v0.2.3-alpha.3
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -572,11 +572,12 @@
 	/**
 	 * 엘리먼트 속성에 대해 검색어로 시작하는 속성일 경우 오브젝트 리턴
 	 * 
+	 * @param {Element} el 기준 엘리먼트
 	 * @param {String} str 검색할 스트링
 	 * @returns {Object}
 	 */
-	module.exports.getMatchAttr = function (str) {
-		var attrs = this.attributes;
+	module.exports.getMatchAttr = function (el, str) {
+		var attrs = el.attributes;
 		for (var i = attrs.length; i--;) {
 			if (attrs[i].nodeName.indexOf(str) === 0) {
 				return {
@@ -1536,10 +1537,11 @@
 					return container.classList.remove('mp-is-active');
 				}, false);
 
-				this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
+				container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
 
-				window.addEventListener('resize', this.updateSizeOption.bind(this), false);
-				window.addEventListener('scroll', this.updateSizeOption.bind(this), false);
+				clearInterval(container.sizeTimer);
+				container.sizeTimer = setInterval(this.updateSizeOption.bind(this), 50);
+
 				window.addEventListener('keydown', this.keydown.bind(this), false);
 			}
 
@@ -1556,8 +1558,8 @@
 					return _this2.player.el.removeEventListener(eventName, _this2[eventName].bind(_this2), false);
 				});
 
-				window.removeEventListener('resize', this.updateSizeOption.bind(this), false);
-				window.removeEventListener('scroll', this.updateSizeOption.bind(this), false);
+				clearInterval(this.player.ui.container.sizeTimer);
+
 				window.removeEventListener('keydown', this.keydown.bind(this), false);
 			}
 
@@ -1679,8 +1681,8 @@
 			key: 'updateSizeOption',
 			value: function updateSizeOption() {
 				var container = this.player.ui.container,
-				    maxwidth = _util.getMatchAttr.call(container, 'data-maxwidth-'),
-				    minwidth = _util.getMatchAttr.call(container, 'data-minwidth-'),
+				    maxwidth = (0, _util.getMatchAttr)(container, 'data-maxwidth-'),
+				    minwidth = (0, _util.getMatchAttr)(container, 'data-minwidth-'),
 				    size = 0;
 
 				if (maxwidth !== null) {
