@@ -43,10 +43,11 @@ export default class CommonEvent {
 		container.addEventListener('touchstart', this.active.bind(this), false);
 		container.addEventListener('mouseout', () => container.classList.remove('mp-is-active'), false);
 
-		this.player.ui.container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
+		container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
 
-		window.addEventListener('resize', this.updateSizeOption.bind(this), false);
-		window.addEventListener('scroll', this.updateSizeOption.bind(this), false);
+		clearInterval(container.sizeTimer);
+		container.sizeTimer = setInterval(this.updateSizeOption.bind(this), 50);
+
 		window.addEventListener('keydown', this.keydown.bind(this), false);
 	}
 
@@ -58,8 +59,8 @@ export default class CommonEvent {
 			eventName => this.player.el.removeEventListener(eventName, this[eventName].bind(this), false)
 		);
 
-		window.removeEventListener('resize', this.updateSizeOption.bind(this), false);
-		window.removeEventListener('scroll', this.updateSizeOption.bind(this), false);
+		clearInterval(this.player.ui.container.sizeTimer);
+		
 		window.removeEventListener('keydown', this.keydown.bind(this), false);
 	}
 
