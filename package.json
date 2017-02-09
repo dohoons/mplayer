@@ -1,7 +1,7 @@
 {
 	"name": "mplayer",
 	"description": "MPlayer : HTML5 Media Player",
-	"version": "0.2.3-alpha.2",
+	"version": "0.2.3-alpha.3",
 	"main": "dist/mplayer.min.js",
 	"author": {
 		"name": "dohoons",
