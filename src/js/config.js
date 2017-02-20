@@ -6,7 +6,7 @@ import { getCurrentScriptPath } from './util/util';
  * 플레이어 옵션
  * @typedef	 {Object} 	playerOptions
  * 
- * @property {String} 	[options.skin='player-basic']	- 스킨 선택
+ * @property {String} 	[options.skin='basic']			- 스킨 선택
  * @property {Boolean} 	[options.flexible=false]		- 유동 크기 사용
  * @property {String} 	[options.width='']				- 가로 크기 지정 (css width value)
  * @property {String} 	[options.height='']				- 세로 크기 (css height value)
