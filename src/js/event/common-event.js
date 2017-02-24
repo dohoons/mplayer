@@ -33,7 +33,7 @@ export default class CommonEvent {
 		[].forEach.call(container.querySelectorAll('a, button, input, [tabindex]'), el => {
 			el.addEventListener('focus', () => this.player.ui.container.classList.add('mp-is-focus'));
 			el.addEventListener('focus', this.activeFocus.bind(this));
- -			el.addEventListener('blur', () => this.player.ui.container.classList.remove('mp-is-focus'));
+ 			el.addEventListener('blur', () => this.player.ui.container.classList.remove('mp-is-focus'));
 		});
 
 		// 플레이어 활성화. 일정시간 이후 해제
