@@ -482,7 +482,7 @@
 	 * 플레이어 옵션
 	 * @typedef	 {Object} 	playerOptions
 	 * 
-	 * @property {String} 	[options.skin='player-basic']	- 스킨 선택
+	 * @property {String} 	[options.skin='basic']			- 스킨 선택
 	 * @property {Boolean} 	[options.flexible=false]		- 유동 크기 사용
 	 * @property {String} 	[options.width='']				- 가로 크기 지정 (css width value)
 	 * @property {String} 	[options.height='']				- 세로 크기 (css height value)
@@ -1523,7 +1523,7 @@
 						return _this.player.ui.container.classList.add('mp-is-focus');
 					});
 					el.addEventListener('focus', _this.activeFocus.bind(_this));
-					-el.addEventListener('blur', function () {
+					el.addEventListener('blur', function () {
 						return _this.player.ui.container.classList.remove('mp-is-focus');
 					});
 				});
