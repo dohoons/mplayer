@@ -49,18 +49,27 @@ export default class VideoPlayer extends PlayerWrapper {
 		} else {
 			container.removeChild(poster);
 		}
+
+		if(!opt.width && el.hasAttribute('width')) {
+			let w = el.getAttribute('width');
+			opt.width = (w.indexOf('%') > -1) ? w : w + 'px';
+		}
+
+		if(!opt.height && el.hasAttribute('height')) {
+			let h = el.getAttribute('height');
+			opt.height = (h.indexOf('%') > -1) ? h : h + 'px';
+		}
+
+		if(opt.width) {
+			container.style.width = opt.width;
+		}
+
+		if(opt.height) {
+			container.style.height = opt.height;
+		}
 		
-		// flexible 옵션을 사용하거나 width 또는 height 값이 존재하면 유동사이즈 적용
-		if(opt.flexible || opt.width || opt.height) {
+		if(opt.flexible) {
 			container.classList.add('mp-is-flexible');
-
-			if(opt.width) {
-				container.style.width = opt.width;
-			}
-
-			if(opt.height) {
-				container.style.height = opt.height;
-			}
 		}
 		
 		player.ui = Object.assign(player.ui, {
