@@ -1,7 +1,7 @@
 /**
  * MPlayer : HTML5 Media Player
  * @author dohoons(dohoons@gmail.com)
- * @version v0.2.3-alpha.3
+ * @version v0.2.3-alpha.4
  * @license MIT
  */
 /******/ (function(modules) { // webpackBootstrap
@@ -48,7 +48,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
@@ -250,9 +250,9 @@
 	exports.default = Player;
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 
@@ -470,9 +470,9 @@
 		}
 	}
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -530,6 +530,7 @@
 
 	var UA = navigator.userAgent;
 	var IOS = /iPad|iPhone|iPod/.test(UA);
+	var IPAD = /iPad/.test(UA);
 	var SUPPORT_FS = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled || document.mozFullScreenEnabled;
 	var FSCHANGE_EVENT_LIST = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
 	var ELEMENT_EVENT_LIST = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting'];
@@ -541,15 +542,16 @@
 		PUBLIC_NAMESPACE: PUBLIC_NAMESPACE,
 		UA: UA,
 		IOS: IOS,
+		IPAD: IPAD,
 		SUPPORT_FS: SUPPORT_FS,
 		FSCHANGE_EVENT_LIST: FSCHANGE_EVENT_LIST,
 		ELEMENT_EVENT_LIST: ELEMENT_EVENT_LIST,
 		SCRIPT_PATH: SCRIPT_PATH
 	};
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -625,9 +627,9 @@
 		return script.substring(0, script.lastIndexOf('/'));
 	};
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -806,9 +808,9 @@
 
 	exports.default = PlayerAction;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -935,9 +937,9 @@
 
 	exports.default = VideoPlayer;
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1134,9 +1136,9 @@
 
 	exports.default = PlayerWrapper;
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1339,7 +1341,7 @@
 							_fs.call(document);
 						}
 					}
-				} else if (_config.IOS) {
+				} else if (_config.IOS && !_config.IPAD) {
 					this.player.el.pause();
 					this.player.el.removeAttribute('playsinline');
 					this.player.el.play();
@@ -1465,9 +1467,9 @@
 
 	exports.default = VideoEvent;
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2073,9 +2075,9 @@
 
 	exports.default = CommonEvent;
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2256,9 +2258,9 @@
 
 	exports.default = AudioEvent;
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2446,9 +2448,9 @@
 
 	exports.default = ContextMenu;
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -2645,9 +2647,9 @@
 
 	exports.default = Slider;
 
-/***/ },
+/***/ }),
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2750,5 +2752,5 @@
 
 	exports.default = AudioPlayer;
 
-/***/ }
+/***/ })
 /******/ ]);
