@@ -6,7 +6,7 @@ import { getCurrentScriptPath } from './util/util';
  * 플레이어 옵션
  * @typedef	 {Object} 	playerOptions
  * 
- * @property {String} 	[options.skin='player-basic']	- 스킨 선택
+ * @property {String} 	[options.skin='basic']			- 스킨 선택
  * @property {Boolean} 	[options.flexible=false]		- 유동 크기 사용
  * @property {String} 	[options.width='']				- 가로 크기 지정 (css width value)
  * @property {String} 	[options.height='']				- 세로 크기 (css height value)
@@ -58,6 +58,7 @@ const PUBLIC_NAMESPACE = 'MPlayer';
 
 const UA = navigator.userAgent;
 const IOS = /iPad|iPhone|iPod/.test(UA);
+const IPAD = /iPad/.test(UA);
 const SUPPORT_FS = document.fullscreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled || document.mozFullScreenEnabled;
 const FSCHANGE_EVENT_LIST = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'];
 const ELEMENT_EVENT_LIST = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'error', 'ended', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause',
@@ -70,6 +71,7 @@ module.exports = {
 	PUBLIC_NAMESPACE,
 	UA,
 	IOS,
+	IPAD,
 	SUPPORT_FS,
 	FSCHANGE_EVENT_LIST,
 	ELEMENT_EVENT_LIST,

@@ -1,6 +1,6 @@
 'use strict';
 
-import { IOS, SUPPORT_FS, FSCHANGE_EVENT_LIST } from '../config';
+import { IOS, IPAD, SUPPORT_FS, FSCHANGE_EVENT_LIST } from '../config';
 import CommonEvent from './common-event';
 
 /**
@@ -127,7 +127,7 @@ class VideoEvent extends CommonEvent {
 					fs.call(document);
 				}
 			}
-		} else if(IOS) {
+		} else if(IOS && !IPAD) {
 			this.player.el.pause();
 			this.player.el.removeAttribute('playsinline');
 			this.player.el.play();
