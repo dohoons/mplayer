@@ -2,10 +2,10 @@
 .mplayer-minimal { box-sizing: border-box; display: inline-block; text-align: left; background: #000; position: relative; overflow: hidden; /* 센터 플레이 아이콘 */ }
 .mplayer-minimal * { box-sizing: border-box; }
 .mplayer-minimal .mp-media-el { height: 100%; }
-.mplayer-minimal .mp-media-el video { display: block; outline: 0 none; }
+.mplayer-minimal .mp-media-el video { display: block; width: 100%; height: auto; outline: 0 none; }
 .mplayer-minimal .mp-media-el video::-webkit-media-controls { display: none; }
-.mplayer-minimal.mp-is-flexible { width: 100%; height: 100%; }
-.mplayer-minimal.mp-is-flexible video { width: 100%; height: 100%; position: absolute; }
+.mplayer-minimal.mp-is-flexible { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+.mplayer-minimal.mp-is-flexible video { width: 100%; height: 100%; position: absolute; position: absolute; top: 0; left: 0; }
 .mplayer-minimal.mp-is-fullscreen { width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 999999; }
 .mplayer-minimal.mp-is-fullscreen video { width: 100%; height: 100%; }
 .mplayer-minimal .mp-poster { width: 100%; height: 100%; background-size: cover; background-position: 50%; position: absolute; top: 0; left: 0; cursor: pointer; }
