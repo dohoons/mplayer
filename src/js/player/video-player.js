@@ -50,11 +50,13 @@ export default class VideoPlayer extends PlayerWrapper {
 			container.removeChild(poster);
 		}
 
+		// element attr width
 		if(!opt.width && el.hasAttribute('width')) {
 			let w = el.getAttribute('width');
 			opt.width = (w.indexOf('%') > -1) ? w : w + 'px';
 		}
 
+		// element attr height
 		if(!opt.height && el.hasAttribute('height')) {
 			let h = el.getAttribute('height');
 			opt.height = (h.indexOf('%') > -1) ? h : h + 'px';
