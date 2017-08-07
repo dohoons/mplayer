@@ -88,7 +88,7 @@ export default class PlayerAction {
 	 * @type {Number}
 	 */
 	set volume(num) {
-		if(num > 1) num = 1
+		if(num > 1) num = 1;
 		if(num < 0) num = 0;
 		this.el.volume = num;
 	}
