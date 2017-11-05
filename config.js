@@ -51,22 +51,7 @@ var webServerOptions = [
 	// http://localhost:8000
 	{
 		dir: test,
-		host: 'localhost',
-		port: 8000,
-		livereload: false,
-		directoryListing: false,
-		open: false,
-		proxies: [
-			{
-				source: '/mplayer',
-				target: `http://${ip}:8100/dist`
-			}
-		]
-	},
-	// 네트워크에서 접속하는 경우
-	{
-		dir: test,
-		host: ip,
+		host: '0.0.0.0',
 		port: 8000,
 		livereload: false,
 		directoryListing: false,
