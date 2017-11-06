@@ -18,7 +18,9 @@ class AudioUIEvent {
 
 	/** 탐색 드래그 핸들러 */
 	progressOnDrag(value) {
-		this.player.el.currentTime = this.player.el.duration / 100 * value;
+		if(this.player.el.duration) {
+			this.player.el.currentTime = this.player.el.duration / 100 * value;
+		}
 	}
 
 	/** 음량 드래그 핸들러 */
