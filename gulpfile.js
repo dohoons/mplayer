@@ -95,13 +95,16 @@ gulp.task('script', function() {
 			filename: to
 		},
 		module: {
-			loaders: [
+			rules: [
 				{
+					test: /\.js$/,
 					exclude: /(node_modules|bower_components)/,
-					loader: 'babel',
-					query: {
-						"presets": ["latest"],
-						"plugins": ["transform-object-assign"]
+					use: {
+						loader: 'babel-loader',
+						options: {
+							presets: ['env'],
+							plugins: ["transform-object-assign"]
+						}
 					}
 				}
 			]
