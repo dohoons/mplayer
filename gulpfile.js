@@ -87,7 +87,7 @@ gulp.task('doc', function() {
 // 스크립트
 gulp.task('script', function() {
 	var from = `${config.src}/js/player.js`;
-	var to = `${config.pkg.name}.js`;
+	var to = `mplayer.js`;
 
 	var webpackConfig = {
 		// devtool: 'source-map',
