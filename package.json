@@ -1,5 +1,5 @@
 {
-	"name": "mplayer",
+	"name": "html5-media-player",
 	"description": "MPlayer : HTML5 Media Player",
 	"version": "0.2.4-alpha.1",
 	"main": "dist/mplayer.min.js",
