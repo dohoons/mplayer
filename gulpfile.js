@@ -118,10 +118,6 @@ gulp.task('script', function() {
 			console.log(err);
 			this.emit('end');
 		})
-  		.pipe(header(config.banner, { pkg : config.pkg }))
-		.pipe(gulp.dest(config.dist))
-
-		// min 버전 배포
 		.pipe(uglify())
   		.pipe(header(config.banner, { pkg : config.pkg }))
 		.pipe(rename({ suffix: '.min' }))
