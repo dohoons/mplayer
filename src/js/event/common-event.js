@@ -1,5 +1,6 @@
 'use strict';
 
+import classList from 'classlist';
 import { ELEMENT_EVENT_LIST } from '../config';
 import { sec2str, getMatchAttr } from '../util/util';
 
@@ -31,9 +32,9 @@ export default class CommonEvent {
 
 		// 내부에 포커스되면 플레이어 활성화. 일정시간 이후 해제
 		[].forEach.call(container.querySelectorAll('a, button, input, [tabindex]'), el => {
-			el.addEventListener('focus', () => this.player.ui.container.classList.add('mp-is-focus'));
+			el.addEventListener('focus', () => classList(this.player.ui.container).add('mp-is-focus'));
 			el.addEventListener('focus', this.activeFocus.bind(this));
- 			el.addEventListener('blur', () => this.player.ui.container.classList.remove('mp-is-focus'));
+ 			el.addEventListener('blur', () => classList(this.player.ui.container).remove('mp-is-focus'));
 		});
 
 		// 플레이어 활성화. 일정시간 이후 해제
@@ -41,7 +42,7 @@ export default class CommonEvent {
 		container.addEventListener('mousemove', this.active.bind(this), false);
 		container.addEventListener('touchmove', this.active.bind(this), false);
 		container.addEventListener('touchstart', this.active.bind(this), false);
-		container.addEventListener('mouseout', () => container.classList.remove('mp-is-active'), false);
+		container.addEventListener('mouseout', () => classList(container).remove('mp-is-active'), false);
 
 		container.addEventListener('contextmenu', this.contextmenu.bind(this), false);
 
@@ -130,18 +131,18 @@ export default class CommonEvent {
 		
 		if(btnPlayPause) {
 			if(el.paused) {
-				btnPlayPause.classList.remove('mp-is-paused');
+				classList(btnPlayPause).remove('mp-is-paused');
 				btnPlayPause.innerHTML = btnPlayPause.getAttribute('data-first-text');
 			} else {
-				btnPlayPause.classList.add('mp-is-paused');
+				classList(btnPlayPause).add('mp-is-paused');
 				btnPlayPause.innerHTML = btnPlayPause.getAttribute('data-second-text');
 			}
 		}
 		
 		if(el.paused) {
-			player.ui.container.classList.remove('mp-is-playing');
+			classList(player.ui.container).remove('mp-is-playing');
 		} else {
-			player.ui.container.classList.add('mp-is-playing');
+			classList(player.ui.container).add('mp-is-playing');
 		}
 
 		if(currentTime) {
@@ -154,10 +155,10 @@ export default class CommonEvent {
 
 		if(btnMute) {
 			if(el.muted) {
-				btnMute.classList.add('mp-is-muted');
+				classList(btnMute).add('mp-is-muted');
 				btnMute.innerHTML = btnMute.getAttribute('data-second-text');
 			} else {
-				btnMute.classList.remove('mp-is-muted');
+				classList(btnMute).remove('mp-is-muted');
 				btnMute.innerHTML = btnMute.getAttribute('data-first-text');
 			}
 		}
@@ -176,9 +177,9 @@ export default class CommonEvent {
 			size = parseInt(maxwidth.name);
 
 			if(container.offsetWidth <= size) {
-				container.classList.add(maxwidth.value);
+				classList(container).add(maxwidth.value);
 			} else {
-				container.classList.remove(maxwidth.value);
+				classList(container).remove(maxwidth.value);
 			}
 		}
 		
@@ -186,9 +187,9 @@ export default class CommonEvent {
 			size = parseInt(minwidth.name);
 
 			if(container.offsetWidth >= size) {
-				container.classList.add(minwidth.value);
+				classList(container).add(minwidth.value);
 			} else {
-				container.classList.remove(minwidth.value);
+				classList(container).remove(minwidth.value);
 			}
 		}
 	}
@@ -199,11 +200,11 @@ export default class CommonEvent {
 	active() {
 		let container = this.player.ui.container;
 
-		container.classList.remove('mp-is-active-focus');
-		container.classList.add('mp-is-active');
+		classList(container).remove('mp-is-active-focus');
+		classList(container).add('mp-is-active');
 
 		clearTimeout(container.activeTimer);
-		container.activeTimer = setTimeout(() => container.classList.remove('mp-is-active'), 2000);
+		container.activeTimer = setTimeout(() => classList(container).remove('mp-is-active'), 2000);
 	}
 
 	/**
@@ -212,11 +213,11 @@ export default class CommonEvent {
 	activeFocus() {
 		let container = this.player.ui.container;
 
-		container.classList.remove('mp-is-active');
-		container.classList.add('mp-is-active-focus');
+		classList(container).remove('mp-is-active');
+		classList(container).add('mp-is-active-focus');
 
 		clearTimeout(container.activeTimer);
-		container.activeTimer = setTimeout(() => container.classList.remove('mp-is-active-focus'), 2000);
+		container.activeTimer = setTimeout(() => classList(container).remove('mp-is-active-focus'), 2000);
 	}
 
 	/**
@@ -238,7 +239,7 @@ export default class CommonEvent {
 	keydown(e) {
 		let player = this.player;
 
-		if(player.ui.container.classList.contains('mp-is-focus')) {
+		if(classList(player.ui.container).contains('mp-is-focus')) {
 			switch(e.keyCode) {
 				case 32: // 스페이스바
 					e.preventDefault();
@@ -403,7 +404,7 @@ export default class CommonEvent {
 	 */
 	seeked(e) {
 		clearTimeout(this.player.ui.container.seekTimer);
-		this.player.ui.container.seekTimer = setTimeout(() => this.player.ui.container.classList.remove('mp-is-seeking'), 800);
+		this.player.ui.container.seekTimer = setTimeout(() => classList(this.player.ui.container).remove('mp-is-seeking'), 800);
 		this.callback(e);
 	}
 
@@ -412,7 +413,7 @@ export default class CommonEvent {
 	 * @param {Event} e
 	 */
 	seeking(e) {
-		this.player.ui.container.classList.add('mp-is-seeking');
+		classList(this.player.ui.container).add('mp-is-seeking');
 		this.callback(e);
 	}
 

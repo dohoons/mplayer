@@ -1,5 +1,6 @@
 'use strict';
 
+import classList from 'classlist';
 import { DEFAULT_OPTIONS, DEFAULT_CONTEXT_MENU, UA, IOS, SCRIPT_PATH } from '../config';
 import VideoEvent from '../event/video-event';
 import AudioEvent from '../event/audio-event';
@@ -81,17 +82,17 @@ export default class PlayerWrapper {
 		ui.container.querySelector('.mp-media-el').appendChild(el);
 
 		// element manipulation
-		el.classList.add('el');
+		classList(el).add('el');
 		el.controls = false;
 		el.setAttribute('playsinline', '');
 		el.setAttribute('tabindex', '0');
 
 		if(UA.indexOf('MSIE 9') > -1) {
-			ui.container.classList.add('mp-is-ie9');
+			classList(ui.container).add('mp-is-ie9');
 		}
 
 		if(IOS) {
-			ui.container.classList.add('mp-is-ios');
+			classList(ui.container).add('mp-is-ios');
 		}
 
 		if(player.opt.contextmenu) {

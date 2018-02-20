@@ -1,12 +1,5 @@
 'use strict';
 
-// classList polyfill
-import './vendors/classlist';
-
-// ES6 Promise polyfill
-// import Promise from 'es6-promise';
-// Promise.polyfill(); 
-
 // DOMParser text/html MIME type polyfill
 // import './vendors/domparser';
 

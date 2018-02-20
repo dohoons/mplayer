@@ -1,5 +1,6 @@
 'use strict';
 
+import classList from 'classlist';
 import PlayerWrapper from './wrapper';
 import Slider from '../ui/slider';
 import VideoEvent from '../event/video-event';
@@ -71,7 +72,7 @@ export default class VideoPlayer extends PlayerWrapper {
 		}
 		
 		if(opt.flexible) {
-			container.classList.add('mp-is-flexible');
+			classList(container).add('mp-is-flexible');
 		}
 		
 		player.ui = Object.assign(player.ui, {

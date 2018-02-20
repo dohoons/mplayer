@@ -1,5 +1,6 @@
 'use strict';
 
+import classList from 'classlist';
 import { IOS, IPAD, SUPPORT_FS, FSCHANGE_EVENT_LIST } from '../config';
 import CommonEvent from './common-event';
 
@@ -96,7 +97,7 @@ class VideoEvent extends CommonEvent {
 	 */
 	play() {
 		super.play();
-		this.player.ui.poster.classList.add('mp-hide');
+		classList(this.player.ui.poster).add('mp-hide');
 	}
 
 	/**
@@ -105,7 +106,7 @@ class VideoEvent extends CommonEvent {
 	 */
 	timeupdate(e) {
 		super.timeupdate(e);
-		this.player.ui.poster.classList.add('mp-hide');
+		classList(this.player.ui.poster).add('mp-hide');
 	}
 
 	/**
@@ -134,13 +135,13 @@ class VideoEvent extends CommonEvent {
 			this.player.el.removeAttribute('playsinline');
 			this.player.el.play();
 		} else {
-			if(container.classList.contains('mp-is-fullscreen')) {
-				container.classList.remove('mp-is-fullscreen');
-				btn.classList.remove('mp-is-fullscreen');
+			if(classList(container).contains('mp-is-fullscreen')) {
+				classList(container).remove('mp-is-fullscreen');
+				classList(btn).remove('mp-is-fullscreen');
 				btn.innerHTML = btn.getAttribute('data-first-text');
 			} else {
-				container.classList.add('mp-is-fullscreen');
-				btn.classList.add('mp-is-fullscreen');
+				classList(container).add('mp-is-fullscreen');
+				classList(btn).add('mp-is-fullscreen');
 				btn.innerHTML = btn.getAttribute('data-second-text');
 			}
 		}
@@ -155,13 +156,13 @@ class VideoEvent extends CommonEvent {
 		let fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
 
 		if (Boolean(fullscreenElement) === false) {
-			container.classList.remove('mp-is-fullscreen');
-			btn.classList.remove('mp-is-fullscreen');
+			classList(container).remove('mp-is-fullscreen');
+			classList(btn).remove('mp-is-fullscreen');
 			btn.innerHTML = btn.getAttribute('data-first-text');
 		}
 		if(Boolean(fullscreenElement) === true && fullscreenElement == container) {
-			container.classList.add('mp-is-fullscreen');
-			btn.classList.add('mp-is-fullscreen');
+			classList(container).add('mp-is-fullscreen');
+			classList(btn).add('mp-is-fullscreen');
 			btn.innerHTML = btn.getAttribute('data-second-text');
 		}
 	}

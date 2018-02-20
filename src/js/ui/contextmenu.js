@@ -1,5 +1,6 @@
 'use strict';
 
+import classList from 'classlist';
 import { closest } from '../util/util';
 
 const contextMenuStyle = `
@@ -159,12 +160,12 @@ export default class ContextMenu {
 			left = e.clientX + scrollLeft;
 		
 		if(left >= rightLimit) {
-			this.el.classList.add('mplayer-context-dir-left')
+			classList(this.el).add('mplayer-context-dir-left')
 			left = rightLimit;
 		}
 
 		if(top >= bottomLimit) {
-			this.el.classList.add('mplayer-context-dir-top')
+			classList(this.el).add('mplayer-context-dir-top')
 			top = bottomLimit;
 		}
 
