@@ -92,7 +92,9 @@ gulp.task('script', function() {
 	var webpackConfig = {
 		// devtool: 'source-map',
 		output: {
-			filename: to
+			filename: to,
+			library: 'MPlayer',
+			libraryTarget: 'umd'
 		},
 		module: {
 			rules: [

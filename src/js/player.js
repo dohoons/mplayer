@@ -138,5 +138,4 @@ class Player extends PlayerAction {
 	}
 }
 
-global[PUBLIC_NAMESPACE] = Player;
-export default Player;
+module.exports = Player;

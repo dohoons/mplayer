@@ -54,8 +54,6 @@ const DEFAULT_CONTEXT_MENU = [
 	]}
 ];
 
-const PUBLIC_NAMESPACE = 'MPlayer';
-
 const UA = navigator.userAgent;
 const IOS = /iPad|iPhone|iPod/.test(UA);
 const IPAD = /iPad/.test(UA);
@@ -68,7 +66,6 @@ const SCRIPT_PATH = getCurrentScriptPath();
 module.exports = {
 	DEFAULT_OPTIONS,
 	DEFAULT_CONTEXT_MENU,
-	PUBLIC_NAMESPACE,
 	UA,
 	IOS,
 	IPAD,
